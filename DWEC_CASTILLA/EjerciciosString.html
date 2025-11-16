@@ -1,0 +1,29 @@
+<DOCTYPE! html>
+<body>
+    <script>
+        //EJERCICIO 1
+
+        //Expresion Regular IPV4
+  let ipRegex = /^((25[0-5]|2[0-4]\d|1\d{2}|[0-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)$/ ;
+  let ip = prompt("introduce la ip");
+  alert(ipRegex.test(ip)); 
+
+//EJERCICIO 2
+
+ let cadena = "filca.marica.sapronov";
+
+
+ let cadenaNueva = cadena.replaceAll('.','_');
+
+ alert(cadenaNueva);
+
+ //EJERCICIO 3
+let cadenaA = "hola como estamos todas aquí";
+
+let aContadas = cadenaA.match(/a/g);
+let totalA = aContadas ? aContadas.length : 0;
+alert('hay ' + totalA + ' a en todo el texto');
+</script>
+</body>
+
+</html>
