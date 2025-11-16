@@ -1,0 +1,56 @@
+.contenedor {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 2vw;
+   justify-content: center;
+}
+
+.contenedor > div {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 10px;
+}
+
+.contenedor div div {
+   width: 300px;
+   height: 300px;
+   box-shadow: 5px 5px 10px black;
+}
+
+#rojo {
+   background-color: red;
+}
+
+#azul {
+   background-color: blue;
+}
+
+#verde {
+   background-color: green;
+}
+
+#negro {
+   background-color: black;
+}
+
+.hover-effect {
+   border-radius: 100%;
+}
+
+.contenedor div div.sin-sombra {
+   box-shadow: none;
+}
+
+.contenedor div div.sombra-interior { 
+   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5) inset;
+}
+
+.fijo {
+   border-radius: 100%;
+}
+
+.cuadrado {
+   cursor: pointer;
+   transition: all 0.3s ease;
+}

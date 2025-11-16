@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Cambiar color</title>
+</head>
+
+<body>
+    <div id="colorDiv" style="border-style: solid; border-color: black; border-width: 3px; border-radius: 10px; height: 300px; width: 300px;">
+    </div>
+
+    <br>
+
+    <form>
+        <input type="radio" name="color" value="red"> red
+        <input type="radio" name="color" value="green"> green
+        <input type="radio" name="color" value="blue"> blue
+        <input type="radio" name="color" value="yellow"> yellow
+    </form>
+
+    <br>
+
+    <button onclick="cambiarColor()">CAMBIAR COLOR</button>
+
+    <script>
+        function cambiarColor() {
+            // Obtener el div por su ID
+            const div = document.getElementById('colorDiv');
+            
+            // Obtener todos los radio buttons
+            const radios = document.getElementsByName('color');
+            
+            // Buscar cuál radio button está seleccionado
+            let colorSeleccionado = null;
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    colorSeleccionado = radios[i].value;
+                    break;
+                }
+            }
+            
+            // Cambiar el color de fondo del div si hay un color seleccionado
+            if (colorSeleccionado) {
+                div.style.backgroundColor = colorSeleccionado;
+            } else {
+                alert('Por favor, selecciona un color');
+            }
+        }
+    </script>
+</body>
+
+</html>

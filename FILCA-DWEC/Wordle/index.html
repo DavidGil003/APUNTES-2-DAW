@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Low Cost</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/wordle.js" type="text/javascript" defer></script>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>WORDLE LOW COST</h1>
+        
+        <!-- Pantalla de configuración inicial -->
+        <div id="configuracion">
+            <div class="config-grupo">
+                <label for="longitud">Longitud de palabra (4-7 letras):</label>
+                <input type="number" id="longitud" min="4" max="7" value="5">
+            </div>
+            
+            <div id="error" class="mensaje-error"></div>
+            
+            <button id="btnEmpezar" class="btn-principal">EMPEZAR</button>
+        </div>
+
+        <!-- Marcador de puntuación -->
+        <div id="marcador" class="ocultar">
+            <div class="info-juego">
+                <span>Intento: <strong id="intentoActual">1</strong>/6</span>
+                <span>Puntos: <strong id="puntos">0</strong></span>
+            </div>
+        </div>
+
+        <!-- Tablero de juego -->
+        <div id="tablero" class="ocultar">
+            <!-- Se generará dinámicamente con JavaScript -->
+        </div>
+
+        <!-- Teclado virtual -->
+        <div id="teclado" class="ocultar">
+            <div class="fila-teclado">
+                <div class="tecla" data-letra="Q">Q</div>
+                <div class="tecla" data-letra="W">W</div>
+                <div class="tecla" data-letra="E">E</div>
+                <div class="tecla" data-letra="R">R</div>
+                <div class="tecla" data-letra="T">T</div>
+                <div class="tecla" data-letra="Y">Y</div>
+                <div class="tecla" data-letra="U">U</div>
+                <div class="tecla" data-letra="I">I</div>
+                <div class="tecla" data-letra="O">O</div>
+                <div class="tecla" data-letra="P">P</div>
+            </div>
+            <div class="fila-teclado">
+                <div class="espaciador"></div>
+                <div class="tecla" data-letra="A">A</div>
+                <div class="tecla" data-letra="S">S</div>
+                <div class="tecla" data-letra="D">D</div>
+                <div class="tecla" data-letra="F">F</div>
+                <div class="tecla" data-letra="G">G</div>
+                <div class="tecla" data-letra="H">H</div>
+                <div class="tecla" data-letra="J">J</div>
+                <div class="tecla" data-letra="K">K</div>
+                <div class="tecla" data-letra="L">L</div>
+                <div class="espaciador"></div>
+            </div>
+            <div class="fila-teclado">
+                <div class="tecla tecla-especial" data-tecla="ENTER">ENTER</div>
+                <div class="tecla" data-letra="Z">Z</div>
+                <div class="tecla" data-letra="X">X</div>
+                <div class="tecla" data-letra="C">C</div>
+                <div class="tecla" data-letra="V">V</div>
+                <div class="tecla" data-letra="B">B</div>
+                <div class="tecla" data-letra="N">N</div>
+                <div class="tecla" data-letra="M">M</div>
+                <div class="tecla tecla-especial" data-tecla="BORRAR">⌫</div>
+            </div>
+        </div>
+
+        <!-- Pantalla de bloqueo al finalizar -->
+        <div id="protector" class="ocultar"></div>
+
+        <!-- Mensaje final -->
+        <div id="mensajeFinal" class="ocultar">
+            <div class="mensaje-contenido">
+                <h2 id="textoFinal"></h2>
+                <p id="palabraSecreta" class="ocultar"></p>
+                <button id="btnReiniciar" class="btn-principal">VOLVER A JUGAR</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

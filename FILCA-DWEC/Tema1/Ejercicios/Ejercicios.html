@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <script>
+        //Ejercicio 1
+        var edad = prompt("Cual es tu edad?");
+
+        if (edad != null) {
+            if (edad >= 18) {
+                alert("Es mayor de edad");
+            } else {
+                alert("No es mayor de edad");
+            };
+        };
+    </script>
+
+    <script>
+        //Ejercicio 2
+        let contrasenya = "1234";
+        let contrasenyaUsuario = prompt("Escriba la contraseña");
+
+        if (contrasenya == contrasenyaUsuario) {
+            alert("La contraseña es la misma");
+        } else {
+            alert("La contraseña no es la misma");
+        };
+    </script>
+
+    <script>
+        //Ejercicio 3
+        let num1 = prompt("Introduzca el dividendo");
+        let num2 = prompt("Introduzca el divisor");
+
+        if (num2 == 0) {
+            alert("El divisor no puede ser 0");
+        } else {
+            alert(num1 + "/" + num2 + "=  " + num1 / num2);
+        };
+    </script>
+
+    <script>
+        //Ejercicio 4
+        let num = prompt("Introduzca el número");
+
+        if ((num % 2) == 0) {
+            alert("Es par");
+        } else {
+            alert("Es impar");
+        };
+    </script>
+
+    <script>
+        //Ejercicio 5
+        edad = prompt("Introduzca tu edad");
+        let salarioMensual = prompt("Introduzca tu salario mensual");
+
+        if ((edad > 16) && (salarioMensual >= 1000)) {
+            alert("Te toca tributar");
+        } else {
+            alert("No te toca tributar")
+        };
+    </script>
+
+    <script>
+        //Ejercicio 6
+        let nombre = prompt("Indica tu nombre");
+        let sexo = prompt("Indica tu sexo, mujer u hombre").toLowerCase();
+        let grupo;
+
+        let primeraLetraNombre = nombre.trim.charAt(0).toLowerCase();
+
+        if (((sexo == "mujer") && (primeraLetraNombre < "m")) || ((sexo == "hombre") && (primeraLetraNombre > "n"))) {
+            grupo = "A"
+        } else {
+            grupo = "B"
+        };
+
+        alert("Entras al grupo " + grupo);
+    </script>
+</body>
+
+</html>

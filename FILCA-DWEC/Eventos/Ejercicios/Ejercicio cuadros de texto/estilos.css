@@ -1,0 +1,96 @@
+/* Estilos para el contenedor principal del formulario */
+.form-layout {
+    display: flex;
+    justify-content: space-between;
+    /* Agrega la separación entre columnas */
+    gap: 20px; 
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Estilos para cada grupo de etiqueta + campo de texto */
+.form-group {
+    /* Define el ancho base para 3 columnas (aprox. 33.33%) */
+    flex-basis: 32%; 
+    /* Permite que crezca un poco (siempre será igual que los demás) */
+    flex-grow: 1; 
+    /* Añade margen vertical entre los campos */
+    margin-right: 15px;
+    /* Ya no necesitas margin-right */
+}
+
+/* Elimina la regla de :last-child si usas gap */
+
+/* Estilos para las etiquetas (Nombre, Apellidos, DNI) */
+.form-group label {
+   /* Hace que la etiqueta sea un bloque para que pueda ocupar todo el ancho */
+   display: block;
+   /* Estilo de fuente más discreto, similar al de la imagen */
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+   margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+   color: #333; /* Color de texto oscuro */
+}
+
+/* Estilos para los campos de texto (inputs) */
+.form-group input[type="text"] {
+   /* Ocupa todo el ancho de su contenedor (.form-group) */
+   width: 100%;
+   /* Altura de la caja, similar a la imagen */
+   height: 30px;
+   /* Relleno interior para que el texto no toque los bordes */
+   padding: 5px 10px;
+   /* Borde sutil y color de fondo, similar a la imagen */
+   border: 1px solid #ccc;
+   background-color: #f9f9f9;
+   /* Borde superior con un gris más claro, como en la imagen */
+   border-top: 1px solid #ddd;
+   /* Elimina el contorno azul/negro al hacer clic para un look más limpio */
+   outline: none;
+   /* Hace que los bordes sean ligeramente redondeados (opcional) */
+   border-radius: 2px;
+   /* Transición suave para el efecto hover/focus */
+   transition: border-color 0.3s;
+}
+
+/* Efecto al pasar el ratón (hover) */
+.form-group input[type="text"]:hover {
+   border-color: #aaa;
+}
+
+/* Efecto al hacer clic/enfocar (focus) */
+.form-group input[type="text"]:focus {
+   border-color: #888;
+   background-color: #fff; /* Fondo blanco al enfocar */
+}
+
+/* Estilos para el botón de agregar (+) */
+.btn-add {
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   background-color: #4CAF50;
+   color: white;
+   border: none;
+   font-size: 24px;
+   font-weight: bold;
+   cursor: pointer;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   transition: all 0.3s ease;
+}
+
+/* Efecto hover para el botón de agregar */
+.btn-add:hover {
+   background-color: #45a049;
+   transform: scale(1.1);
+   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto al hacer clic */
+.btn-add:active {
+   transform: scale(0.95);
+}

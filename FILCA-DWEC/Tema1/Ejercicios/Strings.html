@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <script>
+        //Ejercicio 1
+        let regex = /^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}$/;
+
+        let ip = prompt("Introduzca la IP");
+
+        alert(regex.test(ip));
+    </script>
+
+    <script>
+        //Ejercicio 2
+        let cadena = "12.43.32.12.54.3.4.545"
+
+        let cadenaNueva = cadena.replaceAll(".", "_");
+
+        alert(cadenaNueva)
+    </script>
+
+    <script>
+        let frase = "Tumba la casa"
+
+        alert(frase.match(/a/gi).length)
+    </script>
+</body>
+
+</html>

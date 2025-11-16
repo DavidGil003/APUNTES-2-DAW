@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 Low Cost</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="contenedor">
+        <h1>2048 LOW COST</h1>
+
+        <!-- Pantalla de configuración inicial -->
+        <div id="configuracion">
+            <h2>Selecciona el tamaño del tablero</h2>
+
+            <div class="opciones-tamano">
+                <button class="btn-tamano" data-tamano="3">
+                    <span class="tamano-numero">3×3</span>
+                    <span class="tamano-desc">Fácil</span>
+                </button>
+                <button class="btn-tamano activo" data-tamano="4">
+                    <span class="tamano-numero">4×4</span>
+                    <span class="tamano-desc">Clásico</span>
+                </button>
+                <button class="btn-tamano" data-tamano="5">
+                    <span class="tamano-numero">5×5</span>
+                    <span class="tamano-desc">Difícil</span>
+                </button>
+            </div>
+
+            <button id="btnEmpezar" class="btn-principal">EMPEZAR JUEGO</button>
+        </div>
+
+        <!-- Panel de juego -->
+        <div id="panelJuego" class="ocultar">
+            <!-- Información superior -->
+            <div class="info-superior">
+                <div class="info-grupo">
+                    <div class="info-label">Puntuación</div>
+                    <div class="info-valor" id="puntuacion">0</div>
+                </div>
+                <div class="info-grupo">
+                    <div class="info-label">Mejor</div>
+                    <div class="info-valor" id="mejorPuntuacion">0</div>
+                </div>
+                <div class="info-grupo">
+                    <div class="info-label">Movimientos</div>
+                    <div class="info-valor" id="movimientos">0</div>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="acciones">
+                <button id="btnNuevoJuego" class="btn-accion">🔄 Nuevo Juego</button>
+                <button id="btnCambiarTamano" class="btn-accion">⚙️ Cambiar Tamaño</button>
+            </div>
+
+            <!-- Contenedor del tablero -->
+            <div id="contenedorTablero">
+                <div id="tablero" class="tablero-4x4">
+                    <!-- Las casillas se generarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+
+            <!-- Controles direccionales -->
+            <div class="controles">
+                <div class="control-fila">
+                    <button class="btn-control" data-direccion="arriba">⬆️</button>
+                </div>
+                <div class="control-fila">
+                    <button class="btn-control" data-direccion="izquierda">⬅️</button>
+                    <button class="btn-control" data-direccion="abajo">⬇️</button>
+                    <button class="btn-control" data-direccion="derecha">➡️</button>
+                </div>
+                <p class="control-hint">Usa las flechas del teclado o los botones</p>
+            </div>
+        </div>
+
+        <!-- Pantalla de bloqueo al finalizar -->
+        <div id="protector" class="ocultar"></div>
+
+        <!-- Mensaje final -->
+        <div id="mensajeFinal" class="ocultar">
+            <div class="mensaje-contenido">
+                <div id="iconoFinal" class="icono-final">🎉</div>
+                <h2 id="tituloFinal"></h2>
+                <div class="estadisticas-finales">
+                    <div class="stat-item">
+                        <span class="stat-label">Puntuación:</span>
+                        <span class="stat-valor" id="puntuacionFinal">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Movimientos:</span>
+                        <span class="stat-valor" id="movimientosFinal">0</span>
+                    </div>
+                    <div class="stat-item" id="mejorFichaContainer">
+                        <span class="stat-label">Mejor ficha:</span>
+                        <span class="stat-valor" id="mejorFichaFinal">0</span>
+                    </div>
+                </div>
+                <div class="botones-finales">
+                    <button id="btnReiniciar" class="btn-principal">🔄 Jugar de nuevo</button>
+                    <button id="btnContinuar" class="btn-secundario ocultar">▶️ Continuar jugando</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
