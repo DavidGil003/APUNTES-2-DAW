@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hundir la flota</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <h1>Hundir la flota — juega contra la CPU</h1>
+            <div style="margin-left:auto" class="small info">
+                Click en el tablero enemigo para atacar. Coloca barcos con "Colocación aleatoria" o usa la tuya propia.
+            </div>
+        </header>
+
+        <div class="boards">
+            <div class="board-card">
+                <div class="board-title"><strong>Tu tablero</strong>
+                    <div class="small">Tus barcos y los impactos enemigos</div>
+                </div>
+                <div id="playerBoard" class="grid"></div>
+                <div class="status small" id="playerStatus">Barcos restantes: <span id="playerLeft"></span></div>
+            </div>
+
+            <div class="board-card">
+                <div class="board-title"><strong>Tablero enemigo</strong>
+                    <div class="small">Ataca haciendo click</div>
+                </div>
+                <div id="enemyBoard" class="grid"></div>
+                <div class="status small" id="enemyStatus">Barcos restantes: <span id="enemyLeft"></span></div>
+            </div>
+
+            <div style="width:260px" class="board-card controls">
+                <div><strong>Controles</strong></div>
+                <div class="ships-list small" id="shipsLegend"></div>
+                <button id="randomPlace" class="btn">Colocación aleatoria</button>
+                <button id="startBtn" class="btn">Comenzar partida</button>
+                <button id="resetBtn" class="btn ghost">Reiniciar</button>
+                <div class="status small" id="log">Pulsa "Colocación aleatoria" y luego "Comenzar partida".</div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="small">Desarrollado — juego simple de Hundir la Flota. IA básica incluida.</div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
