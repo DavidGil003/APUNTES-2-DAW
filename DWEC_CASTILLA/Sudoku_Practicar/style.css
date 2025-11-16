@@ -1,0 +1,159 @@
+/* Estilos Generales */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    color: #333;
+}
+
+/* 1. Configuración */
+#configuracion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#configuracion select, #configuracion button, #btn-validar {
+    font-size: 1em;
+    padding: 10px;
+    margin-top: 10px;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+#error {
+    color: red;
+    margin-top: 10px;
+    height: 1.2em; /* Deja espacio para el mensaje de error */
+    font-weight: bold;
+}
+
+/* 2. Tablero de Juego */
+#tablero-sudoku {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: 450px;
+    height: 450px;
+    border: 3px solid #333;
+    margin-top: 20px;
+    background-color: white;
+}
+
+/* Estilos para cada casilla (input) */
+.casilla {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box; /* Importante para que el borde no afecte al tamaño */
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 0;
+    
+    appearance: textfield;
+    /* Oculta las flechas de los input type="number" */
+    -moz-appearance: textfield;
+}
+.casilla::-webkit-outer-spin-button,
+.casilla::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Casillas de pista (pre-rellenadas) */
+.casilla-pista {
+    background-color: #eee;
+    color: #333;
+}
+
+/* Casillas del usuario */
+.casilla-usuario {
+    background-color: #fff;
+    color: #005A9C;
+}
+
+
+.borde-inferior {
+    border-bottom: 3px solid #333;
+}
+.borde-derecho {
+    border-right: 3px solid #333;
+}
+
+.error-validacion {
+    background-color: #F8D7DA; 
+    color: #721C24;
+}
+
+
+
+.puntuacion-box {
+    background-color: #ddd;
+    border: 2px solid #aaa;
+    padding: 10px 20px;
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 20px;
+    width: 150px;
+    border-radius: 8px;
+}
+
+#temporizador {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+}
+
+.ocultar {
+    display: none !important;
+}
+
+#protector {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+
+#mensajeFinal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 20;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#mensajeFinal h2 {
+    margin-top: 0;
+}
+
+#mensajeFinal button {
+    font-size: 1em;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
