@@ -1,0 +1,124 @@
+/* ====== Estilos generales ====== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #dfe9f3 0%, #ffffff 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* ====== Contenedor principal ====== */
+.contenedor-padre {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* ====== Cada bloque de datos ====== */
+.contenedor {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contenedor:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* ====== Labels y campos de texto ====== */
+label {
+    font-weight: 600;
+    color: #333;
+}
+
+.caja-texto {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.caja-texto:disabled {
+    background-color: #f7f7f7;
+    color: #666;
+}
+
+.caja-texto:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 4px rgba(74, 144, 226, 0.5);
+    outline: none;
+}
+
+/* ====== Botones de acción ====== */
+button {
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.editar {
+    background-color: #4a90e2;
+    color: #fff;
+    padding: 0.6rem 1rem;
+}
+
+.editar:hover {
+    background-color: #357ABD;
+}
+
+.borrar {
+    background-color: #ff5c5c;
+    color: #fff;
+    padding: 0.6rem 0.9rem;
+}
+
+.borrar:hover {
+    background-color: #e04343;
+}
+
+/* ====== Botón Añadir ====== */
+#anyadir {
+    margin-top: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+}
+
+#anyadir:hover {
+    background-color: #43a047;
+    transform: scale(1.1);
+}
+
+/* ====== Responsivo ====== */
+@media (max-width: 500px) {
+    .contenedor {
+        padding: 1rem;
+    }
+
+    #anyadir {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+}

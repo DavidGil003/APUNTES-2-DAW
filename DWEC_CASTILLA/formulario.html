@@ -1,0 +1,202 @@
+<DOCTYPE! html>
+    <html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ejercicio - Formulario Total</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(120deg, #7b0000, #3a0000);
+                color: #fff;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+
+            header {
+                background-color: #fff;
+                color: #b40000;
+                font-weight: bold;
+                text-align: left;
+                padding: 10px 20px;
+                font-size: 22px;
+            }
+
+            header span {
+                float: right;
+                font-weight: 900;
+                font-size: 26px;
+                color: #e00000;
+            }
+
+            h1 {
+                margin-top: 40px;
+                font-size: 48px;
+                font-weight: normal;
+            }
+
+            .contenedor {
+                background-color: #bfbfbf;
+                width: 500px;
+                margin: 40px auto;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+                color: black;
+            }
+
+            .contenedor h2 {
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            form {
+                text-align: left;
+            }
+
+            label {
+                display: inline-block;
+                width: 130px;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"] {
+                width: 320px;
+                padding: 6px;
+                border: 1px solid #999;
+                border-radius: 3px;
+            }
+
+            .boton {
+                display: block;
+                margin: 20px auto 0;
+                padding: 8px 20px;
+                background-color: blue;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+            .boton:hover {
+                background-color: darkblue;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <h1>Ejercicio</h1>
+
+        <div class="contenedor">
+            <h2>Formulario Total</h2>
+            <form>
+                <label>Nombre:</label>
+                <input onblur="validarTexto(this)" type="text" name="nombre"><br>
+
+                <label>Apellidos:</label>
+                <input onblur="validarTexto(this)" type="text" name="apellidos"><br>
+
+                <label>e-mail:</label>
+                <input onblur="validarEmail(this)" type="email" name="email"><br>
+
+                <label>DNI:</label>
+                <input onblur="validarDni(this)" type="text" name="dni"><br>
+
+                <label>Password:</label>
+                <input onblur="validarPassword(this)" type="password" name="password"><br>
+
+                <label>Repetir password:</label>
+                <input onblur="validarPassword(this)" type="password" name="repassword"><br>
+
+                <label>IP Equipo:</label>
+                <input onblur="validarIp(this)" type="text" name="ip"><br>
+
+                <button type="submit" class="boton">Enviar</button>
+            </form>
+        </div>
+
+        <script>
+      
+        function validarTexto(elemento) {
+            let textoRegex = /^[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+(?:\s[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+)*$/;
+            if (!textoRegex.test(elemento.value)) {
+                elemento.style.borderColor = 'red';
+                return false;
+            } else {
+                elemento.style.borderColor = '';
+                return true;
+            }
+        }
+
+        function validarEmail(elemento) {
+            let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(elemento.value)) {
+                elemento.style.borderColor = 'red';
+                return false;
+            } else {
+                elemento.style.borderColor = '';
+                return true;
+            }
+        }
+
+        function validarDni(elemento) {
+            let dniRegex = /^[0-9]{8}[A-Za-z]$/;
+            if (!dniRegex.test(elemento.value)) {
+                elemento.style.borderColor = 'red';
+                return false;
+            } else {
+                elemento.style.borderColor = '';
+                return true;
+            }
+        }
+
+        function validarPassword(elemento) {
+            let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/;
+            if (!passwordRegex.test(elemento.value)) {
+                elemento.style.borderColor = 'red';
+                return false;
+            } else {
+                elemento.style.borderColor = '';
+                return true;
+            }
+        }
+
+        function validarIp(elemento) {
+            let ipRegex = /^((25[0-5]|2[0-4]\d|1\d{2}|[0-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)$/;
+            if (!ipRegex.test(elemento.value)) {
+                elemento.style.borderColor = 'red';
+                return false;
+            } else {
+                elemento.style.borderColor = '';
+                return true;
+            }
+        }
+    
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let errores = [];
+            let form = e.target;
+            if (!validarTexto(form.nombre)) errores.push('Nombre');
+            if (!validarTexto(form.apellidos)) errores.push('Apellidos');
+            if (!validarEmail(form.email)) errores.push('Email');
+            if (!validarDni(form.dni)) errores.push('DNI');
+            if (!validarPassword(form.password)) errores.push('Password');
+            if (form.password.value !== form.repassword.value) errores.push('Repetir password');
+            if (!validarIp(form.ip)) errores.push('IP Equipo');
+            if (errores.length > 0) {
+                alert('Errores en: ' + errores.join(', '));
+            } else {
+                alert('Formulario correcto');
+              
+            }
+        });
+        </script>
+    </body>
+    </html>

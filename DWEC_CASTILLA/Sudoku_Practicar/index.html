@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Low Cost</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Sudoku Low Cost</h1>
+
+    <div id="configuracion">
+        <label for="dificultad">Elige la dificultad:</label>
+        <select id="dificultad">
+            <option value="">-- Selecciona --</option>
+            <option value="facil">Fácil</option>
+            <option value="medio">Medio</option>
+            <option value="dificil">Difícil</option>
+        </select>
+        <button id="btn-empezar">Empezar</button>
+        <div id="error"></div>
+    </div>
+
+    <div id="juego-container" class="ocultar">
+        
+        <div id="tablero-sudoku"></div>
+
+        <button id="btn-validar">Validar Solución</button>
+
+    </div>
+
+    <div class="puntuacion-box">
+        <span id="temporizador">00:00</span>
+        <div>Tiempo</div>
+    </div>
+
+
+    <div id="protector" class="ocultar"></div>
+    
+    <div id="mensajeFinal" class="ocultar">
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

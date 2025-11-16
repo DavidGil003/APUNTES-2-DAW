@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<head>
+
+</head>
+
+<body>
+    <div style="border-style: solid; border-color: black;border-width: 3px; height: 300px; width: 300px;"></div>
+
+    <form>
+        <input type="radio" name="color" value="red" id="red"> red
+        <input type="radio" name="color" value="blue" id="blue"> blue
+        <input type="radio" name="color" value="green" id="green"> green
+        <input type="radio" name="color" value="yellow" id="yellow"> yellow
+
+
+    </form>
+
+    <button>CAMBIAR COLOR</button>
+
+
+    <script>
+
+        document.querySelector('button').onclick = function () {
+
+            colorSeleccionado = document.querySelector('input[name="color"]:checked');
+
+            if (colorSeleccionado) {
+
+                document.querySelector('div').style.backgroundColor = colorSeleccionado.value;
+            }
+        };
+    </script>
+
+
+</body>
+
+</html>

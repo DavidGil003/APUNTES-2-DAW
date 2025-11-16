@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<head>
+
+    <link rel="stylesheet" href="estiloCambioAvanzado.css">
+
+</head>
+
+<body>
+    <div class="padre">
+        <div class="contenedor-cuadrado">
+            <div class="cuadrados cuadradoUno"></div>
+            <button class="btn-eliminar"> Eliminar </button>
+        </div>
+
+
+        <div class="contenedor-cuadrado">
+            <div class="cuadrados cuadradoDos"></div>
+            <button class="btn-eliminar"> Eliminar </button>
+        </div>
+
+
+        <div class="contenedor-cuadrado">
+            <div class="cuadrados cuadradoTres"></div>
+            <button class="btn-eliminar"> Eliminar </button>
+        </div>
+
+
+        <div class="contenedor-cuadrado">
+            <div class="cuadrados cuadradoCuatro"></div>
+            <button class="btn-eliminar"> Eliminar </button>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        document.querySelectorAll('.cuadrados').forEach(cuadrado => {
+            let esFijo = false;
+
+
+            cuadrado.addEventListener('mouseenter', function () {
+
+                if (!esFijo) {
+                    this.classList.add('circulo');
+                }
+
+
+            });
+
+            cuadrado.addEventListener('mouseleave', function () {
+                if (!esFijo) {
+                    this.classList.remove('circulo');
+                }
+
+
+            });
+            cuadrado.addEventListener('mousedown', function () {
+                if (!esFijo) {
+                    this.classList.add('sinSombra');
+                }
+
+
+            });
+            cuadrado.addEventListener('mouseup', function () {
+                if (!esFijo) {
+                    this.classList.remove('sinSombra');
+                }
+
+
+            });
+
+
+            cuadrado.addEventListener('dblclick', function () {
+                esFijo = true;
+
+                this.classList.add('sinSombra');
+                this.classList.add('sombraInterior', 'circulo');
+
+
+            });
+
+
+        });
+
+        document.querySelectorAll('.btn-eliminar').forEach(boton => {
+
+            boton.addEventListener('click', function () {
+
+                const contenedor = this.parentElement;
+                contenedor.remove();
+
+
+            });
+        });
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

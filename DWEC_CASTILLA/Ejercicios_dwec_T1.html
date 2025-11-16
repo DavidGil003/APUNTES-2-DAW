@@ -1,0 +1,125 @@
+<doctype! html>
+
+    <body>
+        <script>
+
+            //EJERCICIO 1
+            let fecha = prompt("Introduce una fecha (DD/MM/AAAA):");
+            let [dia, mes, anio] = fecha.split("/");
+            const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+            alert(`${Number(dia)} de ${meses[Number(mes) - 1]} de ${anio}`);
+
+            //EJERCICIO 2
+
+            let numRandom = Math.floor(Math.random() * 1000) + 1;
+            let respuesta;
+            do {
+                respuesta = prompt("Introduce un numero para intentar adivinar el numero misterioso");
+                if (respuesta > numRandom) {
+
+                    alert("El numero introducido es mayor al misterioso");
+
+                } else if (respuesta < numRandom) {
+                    alert("El numero introducido es menor al misterioso");
+                } else {
+
+                    alert("has acertado el numero misterioso")
+                }
+            } while (respuesta != numRandom);
+
+
+            //EJERCICIO 3
+            let caracter;
+            do {
+                caracter = prompt("Introduce un caracter o espacio para salir");
+                switch (toLowerCase(caracter)) {
+                    case 'a': alert("Es VOCAL");
+                        break;
+                    case 'e': alert("Es VOCAL");
+                        break;
+                    case 'i': alert("Es VOCAL");
+                        break;
+                    case 'o': alert("Es VOCAL");
+                        break;
+                    case 'u': alert("Es VOCAL");
+                        break;
+                    default: alert("no es VOCAL");
+                        break;
+                }
+            } while (caracter != " ");
+
+            /* 
+            
+            "aeiou".includes(toLowerCase(caracter)) ? alert("Es vocal") : alert("no es vocal");
+            
+            */
+
+            //EJERCICIO 4
+
+
+            //EJERCICIO 4
+            let limiteInferior, limiteSuperior;
+            do {
+                limiteInferior = parseInt(prompt("Introduce el límite inferior"));
+                limiteSuperior = parseInt(prompt("Introduce el límite superior"));
+                if (limiteInferior > limiteSuperior) {
+                    alert("El límite inferior no puede ser mayor que el superior. Inténtalo de nuevo.");
+                }
+            } while (limiteInferior > limiteSuperior);
+
+            let sumaDentro = 0;
+            let fuera = 0;
+            let igualLimite = false;
+
+            let num;
+            do {
+                num = parseInt(prompt("Introduce un número (0 para terminar):"));
+                if (num !== 0) {
+
+                    if (num >= limiteInferior && num <= limiteSuperior) {
+                        sumaDentro += num;
+                    } else {
+                        fuera++;
+                    }
+
+                    if (num === limiteInferior || num === limiteSuperior) {
+                        igualLimite = true;
+                    }
+                }
+            } while (num !== 0);
+
+            alert(
+                `Suma de los números dentro del intervalo: ${sumaDentro}\n` +
+                `Cantidad de números fuera del intervalo: ${fuera}\n` +
+                (igualLimite ? "Se ha introducido algún número igual a los límites." : "No se ha introducido ningún número igual a los límites.")
+            );
+
+
+
+            //EJERCICIO 5
+
+            let color = prompt("Color:");
+            let colores = color.split(",");
+
+            alert([parseInt(colores[0]).toString(16),colores[1].toString(16),colores[2].toString(16)].join(""));
+
+
+
+
+            //EJERCICIO 6
+
+            let cadenaNum = prompt("Introduce una cadena de numero separados por asteriscos");
+
+            let cadenaArray = cadenaNum.split("*");
+
+            let arrayOrdenado = cadenaArray.sort((a, b) => a - b);
+
+
+            alert(arrayOrdenado);
+
+
+
+        </script>
+    </body>
+
+    </html>

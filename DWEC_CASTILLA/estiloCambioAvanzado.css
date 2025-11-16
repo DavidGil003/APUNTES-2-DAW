@@ -1,0 +1,71 @@
+.cuadrados{
+
+height: 300px; 
+width: 300px;
+box-shadow: 5px 5px 10px black;
+}
+
+.circulo{
+
+border-radius: 200px;
+
+}
+
+.padre{
+
+display: flex;
+padding: 10px;
+
+}
+.contenedor-cuadrado{
+
+
+display:flex;
+flex-direction: column;
+align-items: center;
+
+}
+
+.cuadradoUno{
+
+background-color: red;
+margin:10px;
+
+}
+.cuadradoDos{
+
+background-color:blue;
+margin:10px;
+
+
+}
+.cuadradoTres{
+
+background-color: green;
+margin:10px;
+}
+.cuadradoCuatro{
+
+background-color:black;
+margin:10px;
+}
+
+.sinSombra{
+
+    box-shadow: none;
+}
+
+.sombraInterior{
+
+box-shadow: inset 5px 5px 10px black;
+
+
+}
+
+.btn-eliminar{
+
+height: 40px;
+width: 300px;
+
+
+}
