@@ -1,0 +1,357 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 3px;
+}
+
+/* Configuración inicial */
+#configuracion {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.config-grupo {
+    margin-bottom: 25px;
+}
+
+.config-grupo label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.config-grupo input {
+    width: 80px;
+    padding: 12px;
+    font-size: 1.3rem;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    text-align: center;
+    transition: border-color 0.3s;
+}
+
+.config-grupo input:focus {
+    outline: none;
+    border-color: #764ba2;
+}
+
+.mensaje-error {
+    color: #e74c3c;
+    font-weight: 600;
+    font-size: 0.95rem;
+    min-height: 25px;
+    margin-bottom: 15px;
+}
+
+.btn-principal {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-principal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.btn-principal:active {
+    transform: translateY(0);
+}
+
+/* Marcador */
+#marcador {
+    background: white;
+    border-radius: 10px;
+    padding: 15px 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.info-juego {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.info-juego strong {
+    color: #667eea;
+    font-size: 1.3rem;
+}
+
+/* Tablero */
+#tablero {
+    background: white;
+    border-radius: 15px;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.fila {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.casilla {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #d3d6da;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Estados de las casillas */
+.casilla.vacia {
+    background: white;
+    color: #000;
+}
+
+.casilla.llena {
+    border-color: #878a8c;
+    animation: rellenar 0.1s ease;
+}
+
+.casilla.correcta {
+    background: #6aaa64;
+    border-color: #6aaa64;
+    color: white;
+    animation: voltear 0.5s ease;
+}
+
+.casilla.presente {
+    background: #c9b458;
+    border-color: #c9b458;
+    color: white;
+    animation: voltear 0.5s ease;
+}
+
+.casilla.ausente {
+    background: #787c7e;
+    border-color: #787c7e;
+    color: white;
+    animation: voltear 0.5s ease;
+}
+
+.casilla.activa {
+    border-color: #667eea;
+    border-width: 3px;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+/* Teclado virtual */
+#teclado {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.fila-teclado {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.fila-teclado:last-child {
+    margin-bottom: 0;
+}
+
+.tecla {
+    min-width: 43px;
+    height: 58px;
+    background: #d3d6da;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.tecla:hover {
+    background: #bbbfc3;
+    transform: scale(1.05);
+}
+
+.tecla:active {
+    transform: scale(0.95);
+}
+
+.tecla-especial {
+    min-width: 65px;
+    font-size: 0.9rem;
+}
+
+.espaciador {
+    width: 20px;
+}
+
+/* Estados del teclado */
+.tecla.correcta {
+    background: #6aaa64;
+    color: white;
+}
+
+.tecla.presente {
+    background: #c9b458;
+    color: white;
+}
+
+.tecla.ausente {
+    background: #787c7e;
+    color: white;
+}
+
+/* Pantalla de bloqueo */
+#protector {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+/* Mensaje final */
+#mensajeFinal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.mensaje-contenido {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 50px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    animation: aparecer 0.4s ease;
+}
+
+.mensaje-contenido h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#palabraSecreta {
+    font-size: 1.2rem;
+    color: #667eea;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* Clase para ocultar elementos */
+.ocultar {
+    display: none !important;
+}
+
+/* Animaciones */
+@keyframes rellenar {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes voltear {
+    0% { transform: rotateX(0deg); }
+    50% { transform: rotateX(90deg); }
+    100% { transform: rotateX(0deg); }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .casilla {
+        width: 50px;
+        height: 50px;
+        font-size: 1.6rem;
+    }
+    
+    .tecla {
+        min-width: 35px;
+        height: 50px;
+        font-size: 1rem;
+    }
+    
+    .tecla-especial {
+        min-width: 55px;
+        font-size: 0.8rem;
+    }
+    
+    .mensaje-contenido {
+        padding: 30px 35px;
+    }
+    
+    .mensaje-contenido h2 {
+        font-size: 1.5rem;
+    }
+}

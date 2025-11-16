@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicios 2</title>
+</head>
+
+<body>
+    <!-- <script>
+        //Ejercicio 1
+        const meses = [
+            "enero",
+            "febrero",
+            "marzo",
+            "abril",
+            "mayo",
+            "junio",
+            "julio",
+            "agosto",
+            "septiembre",
+            "octubre",
+            "noviembre",
+            "diciembre",
+        ];
+
+        let fechaParsear = "12/01/1978";
+
+        const [dia, mes, anio] = fechaParsear.split("/");
+
+        alert(`${parseInt(dia)} de ${meses[parseInt(mes) - 1]} de ${anio}`);
+    </script>
+
+    <script>
+        //Ejercicio 2
+        let numeroAleatorio = Math.floor(Math.random() * 1000) + 1;
+
+        let numeroUsuario = 0;
+
+        do {
+            numeroUsuario = parseInt(prompt("Introduce el numero"));
+            if (numeroUsuario < numeroAleatorio) {
+                alert(`El numero a adivinar es mayor a ${numeroUsuario}`);
+            } else if (numeroUsuario > numeroAleatorio) {
+                alert(`El numero a adivinar es menor a ${numeroUsuario}`);
+            }
+        } while (numeroAleatorio != numeroUsuario);
+
+        alert(`El numero es el ${numeroAleatorio}`);
+    </script>
+
+    <script>
+        //Ejercicio 3
+        let letra;
+        do {
+            letra = prompt("Introduce una letra");
+
+            if (letra != null && letra != "") {
+                letra = letra.toUpperCase();
+
+                switch (letra) {
+                    case "A":
+                    case "E":
+                    case "I":
+                    case "O":
+                    case "U":
+                        alert(`La letra ${letra} es vocal`);
+                        break;
+                    default:
+                        alert(`La letra ${letra} no es vocal`);
+                        break;
+                }
+            }
+        } while (letra != null && letra != "");
+    </script> -->
+
+    <script>
+        //Ejercicio 4
+        
+        let inferior;
+        
+        let superior;
+
+        do {
+            inferior = parseInt(prompt("Límite inferior:"));
+            superior = parseInt(prompt("Límite superior:"));
+
+            if (inferior >= superior) {
+                alert("El límite inferior debe ser menor que el superior");
+            }
+
+        } while (inferior >= superior);
+
+        let suma = 0;
+        let fueraIntervalo = 0;
+        let igualLimites = false;
+
+        let num;
+        
+        do {
+            num = parseInt(prompt("Introduce un número (0 para terminar):"));
+            
+            if (!isNaN(num) && num != 0) {
+
+                if (num > inferior && num < superior) {
+                    suma += num;
+                } else {
+                    fueraIntervalo++;
+                }
+                
+                if (num == inferior || num == superior) {
+                    igualLimites = true;
+                }
+            }
+        } while (isNaN(num) || num != 0);
+
+        alert(`Suma dentro del intervalo: ${suma}`);
+        alert(`Números fuera del intervalo: ${fueraIntervalo}`);
+        alert(`¿Número igual a límites? ${igualLimites ? "SÍ" : "NO"}`);
+    </script>
+</body>
+
+</html>

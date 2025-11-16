@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Total</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: linear-gradient(to bottom, #E8E8E8, #C0C0C0);
+      border: 8px solid #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .form-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    label {
+      width: 150px;
+      text-align: right;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+
+    input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 2px solid #999;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .error {
+      border-color: #DC143C;
+      background: #FFE6E6;
+    }
+
+    .valid {
+      border-color: #28a745;
+      background: #E6FFE6;
+    }
+
+    .error-msg {
+      position: absolute;
+      left: 165px;
+      bottom: -18px;
+      color: #DC143C;
+      font-size: 12px;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    button {
+      background: #00F;
+      color: #fff;
+      padding: 10px 40px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    var d = {};
+
+    function mostrarError(e, mensaje) {
+      e.className = 'error';
+      let msg = e.parentNode.querySelector('.error-msg');
+      if (!msg) {
+        msg = document.createElement('div');
+        msg.className = 'error-msg';
+        e.parentNode.appendChild(msg);
+      }
+      msg.textContent = mensaje;
+      delete d[e.id];
+    }
+
+    function limpiarError(e) {
+      e.className = 'valid';
+      const msg = e.parentNode.querySelector('.error-msg');
+      if (msg) msg.remove();
+    }
+
+    function v(e, r, m) {
+      if (r.test(e.value) && e.value.trim()) {
+        limpiarError(e);
+        d[e.id] = e.value;
+      } else {
+        mostrarError(e, m);
+      }
+    }
+
+    function vD(e) {
+      var l = 'TRWAGMYFPDXBNJZSQVHLCKE';
+      if (/^\d{8}[A-Za-z]$/.test(e.value) && l[parseInt(e.value.substr(0, 8)) % 23] === e.value.substr(8, 1).toUpperCase()) {
+        limpiarError(e);
+        d[e.id] = e.value;
+      } else {
+        mostrarError(e, 'DNI no válido');
+      }
+    }
+
+    function vP(e) {
+      if (e.value.length >= 6) {
+        limpiarError(e);
+        d[e.id] = e.value;
+      } else {
+        mostrarError(e, 'Mínimo 6 caracteres');
+      }
+    }
+
+    function vP2(e) {
+      var p = document.getElementById('password').value;
+      if (e.value === p && e.value.length >= 6) {
+        limpiarError(e);
+        d[e.id] = e.value;
+      } else {
+        mostrarError(e, 'Las contraseñas no coinciden');
+      }
+    }
+
+    function vI(e) {
+      var p = e.value.split('.');
+      var ok = p.length === 4;
+      for (var i = 0; i < p.length && ok; i++) {
+        var n = parseInt(p[i]);
+        ok = !isNaN(n) && n >= 0 && n <= 255 && p[i] === n.toString();
+      }
+      if (ok) {
+        limpiarError(e);
+        d[e.id] = e.value;
+      } else {
+        mostrarError(e, 'IP no válida');
+      }
+    }
+
+    function env() {
+      var campos = ['nombre', 'apellidos', 'email', 'dni', 'password', 'repetirPassword', 'ipEquipo'];
+      for (var i = 0; i < campos.length; i++) {
+        if (!d[campos[i]]) {
+          alert('Complete todos los campos correctamente');
+          return false;
+        }
+      }
+      alert(
+        'nombreElemento.value: ' + d.nombre +
+        '\nDirección IP de origen: ' + d.ipEquipo +
+        '\nDirección IP de destino: N/A'
+      );
+      return false;
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="form-title">Formulario Total</div>
+    <form onsubmit="return env()">
+      <div class="form-group">
+        <label>Nombre:</label>
+        <input type="text" id="nombre" onblur="v(this,/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,'Solo letras')">
+      </div>
+
+      <div class="form-group">
+        <label>Apellidos:</label>
+        <input type="text" id="apellidos" onblur="v(this,/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,'Solo letras')">
+      </div>
+
+      <div class="form-group">
+        <label>e-mail:</label>
+        <input type="email" id="email" onblur="v(this,/^[^\s@]+@[^\s@]+\.[^\s@]+$/,'Email no válido')">
+      </div>
+
+      <div class="form-group">
+        <label>DNI:</label>
+        <input type="text" id="dni" onblur="vD(this)">
+      </div>
+
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" id="password" onblur="vP(this)">
+      </div>
+
+      <div class="form-group">
+        <label>Repetir password:</label>
+        <input type="password" id="repetirPassword" onblur="vP2(this)">
+      </div>
+
+      <div class="form-group">
+        <label>IP Equipo:</label>
+        <input type="text" id="ipEquipo" onblur="vI(this)">
+      </div>
+
+      <div class="button-container">
+        <button type="submit">Enviar</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

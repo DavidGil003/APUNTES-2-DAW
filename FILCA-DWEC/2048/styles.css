@@ -1,0 +1,573 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 50%, #e17055 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+h1 {
+    color: #776e65;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 30px;
+    text-shadow: 3px 3px 0px rgba(255, 255, 255, 0.5);
+    letter-spacing: 2px;
+}
+
+/* Configuración inicial */
+#configuracion {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+#configuracion h2 {
+    color: #776e65;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.opciones-tamano {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.btn-tamano {
+    background: #f9f6f2;
+    border: 3px solid #bbada0;
+    border-radius: 12px;
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 100px;
+}
+
+.btn-tamano:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-tamano.activo {
+    background: #edc22e;
+    border-color: #edc22e;
+}
+
+.tamano-numero {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #776e65;
+}
+
+.btn-tamano.activo .tamano-numero {
+    color: white;
+}
+
+.tamano-desc {
+    font-size: 0.9rem;
+    color: #8f7a66;
+}
+
+.btn-tamano.activo .tamano-desc {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-principal {
+    background: linear-gradient(135deg, #edc22e 0%, #ed9d0e 100%);
+    color: white;
+    border: none;
+    padding: 18px 45px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(237, 194, 46, 0.4);
+}
+
+.btn-principal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(237, 194, 46, 0.6);
+}
+
+.btn-principal:active {
+    transform: translateY(0);
+}
+
+/* Panel de juego */
+#panelJuego {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.info-superior {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.info-grupo {
+    background: #bbada0;
+    border-radius: 8px;
+    padding: 12px 20px;
+    flex: 1;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #eee4da;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.info-valor {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: white;
+}
+
+.acciones {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn-accion {
+    background: #8f7a66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-accion:hover {
+    background: #9f8a76;
+    transform: translateY(-2px);
+}
+
+/* Tablero */
+#contenedorTablero {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+#tablero {
+    background: #bbada0;
+    border-radius: 10px;
+    padding: 10px;
+    display: grid;
+    gap: 10px;
+    position: relative;
+}
+
+/* Tamaños del tablero */
+.tablero-3x3 {
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+}
+
+.tablero-4x4 {
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+}
+
+.tablero-5x5 {
+    grid-template-columns: repeat(5, 80px);
+    grid-template-rows: repeat(5, 80px);
+}
+
+/* Casillas */
+.casilla {
+    background: rgba(238, 228, 218, 0.35);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #776e65;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.tablero-5x5 .casilla {
+    font-size: 2rem;
+}
+
+.casilla.vacia {
+    background: rgba(238, 228, 218, 0.35);
+}
+
+/* Animación de nueva ficha */
+.casilla.nueva {
+    animation: aparecer 0.2s ease;
+}
+
+@keyframes aparecer {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Animación de fusión */
+.casilla.fusion {
+    animation: fusion 0.3s ease;
+}
+
+@keyframes fusion {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+/* Colores de fichas según valor */
+.ficha-2 {
+    background: #eee4da;
+    color: #776e65;
+}
+
+.ficha-4 {
+    background: #ede0c8;
+    color: #776e65;
+}
+
+.ficha-8 {
+    background: #f2b179;
+    color: white;
+}
+
+.ficha-16 {
+    background: #f59563;
+    color: white;
+}
+
+.ficha-32 {
+    background: #f67c5f;
+    color: white;
+}
+
+.ficha-64 {
+    background: #f65e3b;
+    color: white;
+}
+
+.ficha-128 {
+    background: #edcf72;
+    color: white;
+    font-size: 2rem;
+}
+
+.ficha-256 {
+    background: #edcc61;
+    color: white;
+    font-size: 2rem;
+}
+
+.ficha-512 {
+    background: #edc850;
+    color: white;
+    font-size: 2rem;
+}
+
+.ficha-1024 {
+    background: #edc53f;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.ficha-2048 {
+    background: #edc22e;
+    color: white;
+    font-size: 1.8rem;
+    box-shadow: 0 0 30px rgba(237, 194, 46, 0.7);
+}
+
+.ficha-4096 {
+    background: #3c3a32;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.ficha-8192 {
+    background: #1a1a1a;
+    color: white;
+    font-size: 1.6rem;
+}
+
+/* Tamaño de fuente para tablero 5x5 */
+.tablero-5x5 .ficha-128,
+.tablero-5x5 .ficha-256,
+.tablero-5x5 .ficha-512 {
+    font-size: 1.6rem;
+}
+
+.tablero-5x5 .ficha-1024,
+.tablero-5x5 .ficha-2048,
+.tablero-5x5 .ficha-4096 {
+    font-size: 1.4rem;
+}
+
+.tablero-5x5 .ficha-8192 {
+    font-size: 1.2rem;
+}
+
+/* Controles */
+.controles {
+    margin-top: 20px;
+}
+
+.control-fila {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.btn-control {
+    width: 70px;
+    height: 70px;
+    background: #8f7a66;
+    border: none;
+    border-radius: 8px;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-control:hover {
+    background: #9f8a76;
+    transform: scale(1.05);
+}
+
+.btn-control:active {
+    transform: scale(0.95);
+}
+
+.control-hint {
+    margin-top: 10px;
+    color: #8f7a66;
+    font-size: 0.9rem;
+}
+
+/* Pantalla de bloqueo */
+#protector {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(238, 228, 218, 0.7);
+    z-index: 999;
+    backdrop-filter: blur(3px);
+}
+
+/* Mensaje final */
+#mensajeFinal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.mensaje-contenido {
+    background: white;
+    border-radius: 20px;
+    padding: 45px 55px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+    animation: aparecerMensaje 0.4s ease;
+    min-width: 350px;
+}
+
+@keyframes aparecerMensaje {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.icono-final {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.mensaje-contenido h2 {
+    font-size: 2.2rem;
+    color: #776e65;
+    margin-bottom: 25px;
+}
+
+.estadisticas-finales {
+    background: #f9f6f2;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0d8cf;
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: #8f7a66;
+    font-weight: 600;
+}
+
+.stat-valor {
+    font-size: 1.5rem;
+    color: #776e65;
+    font-weight: 900;
+}
+
+.botones-finales {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-secundario {
+    background: #8f7a66;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secundario:hover {
+    background: #9f8a76;
+    transform: translateY(-2px);
+}
+
+/* Clase para ocultar elementos */
+.ocultar {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    .tablero-3x3 {
+        grid-template-columns: repeat(3, 80px);
+        grid-template-rows: repeat(3, 80px);
+    }
+    
+    .tablero-4x4 {
+        grid-template-columns: repeat(4, 70px);
+        grid-template-rows: repeat(4, 70px);
+    }
+    
+    .tablero-5x5 {
+        grid-template-columns: repeat(5, 60px);
+        grid-template-rows: repeat(5, 60px);
+    }
+    
+    .casilla {
+        font-size: 2rem;
+    }
+    
+    .tablero-4x4 .casilla {
+        font-size: 1.8rem;
+    }
+    
+    .tablero-5x5 .casilla {
+        font-size: 1.5rem;
+    }
+    
+    .ficha-128, .ficha-256, .ficha-512 {
+        font-size: 1.6rem;
+    }
+    
+    .ficha-1024, .ficha-2048, .ficha-4096 {
+        font-size: 1.4rem;
+    }
+    
+    .info-superior {
+        flex-wrap: wrap;
+    }
+    
+    .info-grupo {
+        min-width: 30%;
+    }
+    
+    .info-valor {
+        font-size: 1.4rem;
+    }
+    
+    .mensaje-contenido {
+        padding: 35px 40px;
+        min-width: auto;
+        max-width: 90vw;
+    }
+    
+    .mensaje-contenido h2 {
+        font-size: 1.8rem;
+    }
+    
+    .btn-control {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+    }
+}

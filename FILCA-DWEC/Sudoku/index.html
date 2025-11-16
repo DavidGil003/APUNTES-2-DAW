@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Low Cost</title>
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>🎯 Sudoku Low Cost</h1>
+
+    <div id="tablero" class="inicio">
+        <div>
+            <label for="dificultad">Elige dificultad:</label>
+            <select id="dificultad">
+                <option value="facil">🟢 Fácil</option>
+                <option value="medio">🟡 Medio</option>
+                <option value="dificil">🔴 Difícil</option>
+            </select>
+        </div>
+        <div>
+            <button id="empezar">Empezar Juego</button>
+        </div>
+        <div id="error"></div>
+    </div>
+
+    <div id="controles" class="ocultar">
+        <div class="numero">1</div>
+        <div class="numero">2</div>
+        <div class="numero">3</div>
+        <div class="numero">4</div>
+        <div class="numero">5</div>
+        <div class="numero">6</div>
+        <div class="numero">7</div>
+        <div class="numero">8</div>
+        <div class="numero">9</div>
+    </div>
+
+    <div id="contador" class="ocultar">
+        0<br>movimientos
+    </div>
+
+    <div id="contenedorErrores" class="ocultar">
+        <span class="titulo-errores">Errores: <span id="numeroErrores">0</span>/3</span>
+        <div id="listaErrores"></div>
+    </div>
+
+    <div id="protector" class="ocultar"></div>
+    <div id="mensajeFinal" class="ocultar"></div>
+
+    <script src="js/scripts.js" type="text/javascript"></script>
+</body>
+
+</html> 
