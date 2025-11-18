@@ -1,0 +1,99 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    text-align: center;
+    background-color: #4caf50;
+    color: white;
+    padding: 20px 0;
+}
+
+section {
+    flex: 1;
+    display: flex;
+    padding: 10px;
+    gap: 15px;
+}
+
+.columna-izquierda {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 15px;
+}
+
+.columna-centro {
+    display: flex;
+    flex-direction: column;
+    flex: 2.4;
+    gap: 15px;
+}
+
+.columna-derecha {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 0.5;
+    gap: 15px;
+}
+
+div {
+    border-radius: 10px;
+    margin: 10px 5px;
+}
+
+div div {
+    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.55);
+    -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.55);
+    -moz-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.55);
+}
+
+div p {
+    padding: 10px 30px;
+}
+
+#izquierda-superior {
+    background-color: #f1c40f;
+    flex: 1;
+}
+
+#izquierda-inferior {
+    background-color: #e67e22;
+    flex: 2;
+}
+
+#derecha-superior {
+    background-color: #3498db;
+    flex: 1.3;
+}
+
+#derecha-inferior {
+    background-color: #9b59b6;
+    flex: 1;
+}
+
+#barra-lateral {
+    background-color: #2ecc71;
+    width: 100%;
+}
+
+footer {
+    background-color: #34495e;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}

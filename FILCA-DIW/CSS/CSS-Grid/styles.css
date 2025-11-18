@@ -1,0 +1,166 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-image: url("img/cerebro.jpg");
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    height: 1000px;
+}
+
+header ul {
+    display: flex;
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+}
+
+header ul li {
+    list-style: none;
+}
+
+header ul li a {
+    background-color: #0056b3;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 20px 30px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header ul li a:hover {
+    background-color: #003166;
+    color: yellow;
+}
+
+header h1 {
+    font-size: 75px;
+    padding: 0;
+    margin: 15px;
+    text-shadow: 0px 0px 20px #000000;
+}
+
+header p {
+    font-size: 25px;
+    margin: 15;
+    text-shadow: 0px 0px 10px #000000;
+}
+
+header button {
+    background-color: #007bff;
+    color: white;
+    font-size: 15px;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+header button:hover {
+    background-color: #0056b2;
+}
+
+section {
+    margin: 0 200px;
+}
+
+.titulo-apartado {
+    text-align: center;
+    font-size: 35px;
+    margin-top: 100px;
+}
+
+
+.caracteristicas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.tarjeta-caracteristica {
+    background-color: #f9f9f9;
+    padding: 30px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-caracteristica:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+img {
+    width: 100%;
+    border-radius: 10px;
+
+}
+
+.galeria {
+     background-color: #f4f4f4;
+}
+
+.galeria .titulo-apartado {
+    padding-top: 50px;
+}
+
+.imagenes-galeria {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 40px;
+}
+
+.imagenes-galeria img {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.imagenes-galeria img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.grid-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.tarjeta-especificaciones {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-especificaciones:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.titulo-tarjeta {
+    text-align: center;
+    font-size: 25px;
+}
+
+footer {
+    background-color: #0056b3;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
