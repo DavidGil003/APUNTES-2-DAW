@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>NetFlex - Scroll Horizontal</title>
+<style>
+    body { background-color: #141414; color: white; font-family: Helvetica, Arial, sans-serif; margin: 0; padding-bottom: 50px; }
+    h2 { margin-left: 40px; margin-top: 40px; font-size: 1.5rem; }
+
+    .carousel-container {
+        padding: 20px 40px;
+        display: flex; 
+        gap: 15px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+
+        /* Mostrar barra (antes: scrollbar-width: none) */
+        scrollbar-width: auto; /* Firefox */
+    }
+    /* Mostrar barra en Chrome/Safari (antes estaba oculta) */
+    .carousel-container::-webkit-scrollbar { height: 8px; }
+    .carousel-container::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+    .carousel-container::-webkit-scrollbar-track { background: transparent; }
+
+    .movie-card {
+        /* Aumentado para asegurar desbordamiento en pantallas anchas */
+        flex: 0 0 280px; 
+        height: 150px;
+        background-color: #333;
+        border-radius: 5px;
+        transition: transform 0.3s;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        scroll-snap-align: start;
+    }
+
+    .movie-card:hover { transform: scale(1.05); z-index: 10; background-color: #555; }
+    .movie-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+    .movie-card:hover img { opacity: 1; }
+    .title-overlay { position: absolute; bottom: 10px; left: 10px; font-weight: bold; text-shadow: 1px 1px 3px black; }
+
+    .hero {
+        height: 60vh;
+        background: linear-gradient(to top, #141414, transparent), url('https://via.placeholder.com/1920x800/550000/ffffff?text=SERIE+DEL+MOMENTO');
+        background-size: cover;
+        display: flex; align-items: flex-end; padding: 40px;
+    }
+    .hero h1 { font-size: 4rem; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+    <div class="hero">
+        <div>
+            <h1>Stranger CSS</h1>
+            <p>Una serie sobre cosas extrañas que pasan cuando no usas Flexbox.</p>
+            <button style="padding: 10px 20px; background: white; border: none; font-weight: bold; cursor: pointer;">Reproducir</button>
+        </div>
+    </div>
+
+    <h2>Tendencias ahora</h2>
+    <div class="carousel-container">
+        <div class="movie-card"><div class="title-overlay">Película 1</div></div>
+        <div class="movie-card"><div class="title-overlay">Película 2</div></div>
+        <div class="movie-card"><div class="title-overlay">Película 3</div></div>
+        <div class="movie-card"><div class="title-overlay">Película 4</div></div>
+        <div class="movie-card"><div class="title-overlay">Película 5</div></div>
+        <div class="movie-card"><div class="title-overlay">Película 6</div></div>
+        <div class="movie-card"><div class="title-overlay">Película 7</div></div>
+    </div>
+
+    <h2>Novedades populares</h2>
+    <div class="carousel-container">
+        <div class="movie-card" style="background: #2ecc71"><div class="title-overlay">Docu Tierra</div></div>
+        <div class="movie-card" style="background: #3498db"><div class="title-overlay">Océanos</div></div>
+        <div class="movie-card" style="background: #9b59b6"><div class="title-overlay">Espacio</div></div>
+        <div class="movie-card" style="background: #e67e22"><div class="title-overlay">Volcanes</div></div>
+        <div class="movie-card" style="background: #e74c3c"><div class="title-overlay">Marte</div></div>
+        <div class="movie-card" style="background: #f1c40f"><div class="title-overlay">Sol</div></div>
+    </div>
+
+</body>
+</html>

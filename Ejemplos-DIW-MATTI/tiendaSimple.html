@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike Air Urban - Tienda</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #111; background-color: #fff; }
+
+        /* Header Simple */
+        header { padding: 20px 40px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .brand { font-weight: 900; font-size: 1.5rem; letter-spacing: -1px; }
+        .cart-icon { position: relative; cursor: pointer; }
+        .cart-count { position: absolute; top: -5px; right: -10px; background: black; color: white; font-size: 10px; padding: 2px 5px; border-radius: 50%; }
+
+        /* LAYOUT PRINCIPAL (GRID) */
+        .product-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr; /* Izquierda más ancha que derecha */
+            gap: 60px;
+        }
+
+        /* Columna Izquierda: Galería */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columnas de fotos */
+            gap: 10px;
+        }
+        .gallery img { width: 100%; height: auto; display: block; background: #f5f5f5; }
+        .gallery img:first-child { grid-column: span 2; } /* La primera foto ocupa todo el ancho */
+
+        /* Columna Derecha: Info (STICKY) */
+        .product-info {
+            position: sticky; /* SE QUEDA FIJO AL HACER SCROLL */
+            top: 40px;
+            height: fit-content;
+        }
+
+        .category { color: #757575; font-size: 0.9rem; margin-bottom: 10px; }
+        h1 { font-size: 2.5rem; margin: 0 0 10px 0; line-height: 1; }
+        .price { font-size: 1.2rem; margin-bottom: 20px; display: block; }
+        .desc { color: #555; line-height: 1.6; margin-bottom: 30px; }
+
+        /* Formulario de Talla */
+        .size-selector { margin-bottom: 30px; }
+        .size-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+        
+        /* Radio buttons personalizados */
+        .size-option input { display: none; } /* Ocultamos el radio real */
+        .size-option label {
+            display: flex; justify-content: center; align-items: center;
+            width: 50px; height: 50px;
+            border: 1px solid #ddd; border-radius: 4px;
+            cursor: pointer; transition: 0.2s;
+        }
+        .size-option input:checked + label { border-color: black; color: black; font-weight: bold; }
+        .size-option label:hover { border-color: #999; }
+
+        /* Botones de acción */
+        .actions { display: flex; gap: 10px; flex-direction: column; }
+        .btn-add {
+            padding: 20px; background: black; color: white; border: none;
+            border-radius: 30px; font-size: 1rem; font-weight: bold; cursor: pointer;
+        }
+        .btn-add:hover { opacity: 0.8; }
+
+        /* Botón flotante de ayuda (Extra pedido) */
+        .help-btn {
+            position: fixed; bottom: 20px; right: 20px;
+            background: #25D366; color: white; padding: 15px;
+            border-radius: 50%; font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-decoration: none; z-index: 100;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .product-container { grid-template-columns: 1fr; } /* Una sola columna */
+            .product-info { position: static; } /* Ya no es sticky en móvil */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">URBAN KICKS.</div>
+        <div class="cart-icon">🛒 <span class="cart-count">2</span></div>
+    </header>
+
+    <main class="product-container">
+        <section class="gallery">
+            <img src="https://via.placeholder.com/600x600/eee/333?text=Vista+Frontal" alt="Zapato">
+            <img src="https://via.placeholder.com/600x600/eee/333?text=Detalle" alt="Zapato">
+            <img src="https://via.placeholder.com/600x600/eee/333?text=Suela" alt="Zapato">
+            <img src="https://via.placeholder.com/600x600/eee/333?text=Puesto" alt="Zapato">
+        </section>
+
+        <section class="product-info">
+            <p class="category">Zapatillas Hombre</p>
+            <h1>Air Urban Pro</h1>
+            <span class="price">129.99 €</span>
+            
+            <p class="desc">
+                Diseñadas para la ciudad. Con amortiguación reactiva y materiales premium, 
+                estas zapatillas te acompañarán en cada paso. Disponibles en edición limitada.
+            </p>
+
+            <form action="">
+                <div class="size-selector">
+                    <strong>Selecciona tu talla:</strong>
+                    <div class="size-grid">
+                        <div class="size-option"><input type="radio" name="size" id="s40"><label for="s40">40</label></div>
+                        <div class="size-option"><input type="radio" name="size" id="s41"><label for="s41">41</label></div>
+                        <div class="size-option"><input type="radio" name="size" id="s42" checked><label for="s42">42</label></div>
+                        <div class="size-option"><input type="radio" name="size" id="s43"><label for="s43">43</label></div>
+                        <div class="size-option"><input type="radio" name="size" id="s44"><label for="s44">44</label></div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button type="button" class="btn-add">Añadir a la Cesta</button>
+                    <button type="button" style="padding: 15px; background: white; border: 1px solid #ddd; border-radius: 30px; cursor: pointer;">Guardar en Favoritos ♡</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <a href="#" class="help-btn">💬</a>
+
+</body>
+</html>

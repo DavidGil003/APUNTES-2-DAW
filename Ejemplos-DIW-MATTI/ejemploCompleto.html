@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineStream - Examen Final CSS</title>
+    <style>
+        /* --- 1. RESET Y VARIABLES --- */
+        :root {
+            --bg-dark: #141414;
+            --bg-panel: #1f1f1f;
+            --accent: #e50914; /* Rojo Netflix */
+            --text: #ffffff;
+            --header-h: 70px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Scroll suave + compensación por header fijo */
+        html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            /* Truco: Padding top igual a la altura del header fijo para que no se monte */
+            padding-top: var(--header-h); 
+        }
+
+        /* --- 2. HEADER FIJO (FIXED) --- */
+        .top-navbar {
+            position: fixed; /* Se queda pegado a la ventana */
+            top: 0; left: 0; width: 100%;
+            height: var(--header-h);
+            background-color: rgba(20, 20, 20, 0.95); /* Semitransparente */
+            backdrop-filter: blur(5px); /* Efecto borroso detrás */
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 1000; /* Siempre encima de todo */
+            border-bottom: 1px solid #333;
+        }
+
+        .logo { font-size: 1.8rem; font-weight: bold; color: var(--accent); text-transform: uppercase; }
+        .user-menu { display: flex; gap: 20px; align-items: center; font-size: 0.9rem; }
+        .avatar { width: 35px; height: 35px; background: #ddd; border-radius: 4px; }
+
+        /* --- 3. LAYOUT PRINCIPAL (GRID) --- */
+        .main-layout {
+            display: grid;
+            /* Sidebar de 250px, el resto para el contenido */
+            grid-template-columns: 250px 1fr; 
+            min-height: calc(100vh - var(--header-h));
+        }
+
+        /* --- 4. SIDEBAR (STICKY) --- */
+        .sidebar {
+            background-color: var(--bg-dark);
+            border-right: 1px solid #333;
+            padding: 20px;
+            
+            /* STICKY: Se pega al tope, pero restando la altura del header */
+            position: sticky;
+            top: var(--header-h); 
+            height: calc(100vh - var(--header-h)); /* Ocupa el alto restante de la pantalla */
+            overflow-y: auto; /* Si la sidebar es muy alta, tiene su propio scroll */
+        }
+
+        .menu-group { margin-bottom: 30px; }
+        .menu-title { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+        .sidebar a {
+            display: block; color: #aaa; text-decoration: none; padding: 10px 0; transition: 0.3s;
+        }
+        .sidebar a:hover { color: white; padding-left: 5px; }
+        .sidebar a.active { color: white; font-weight: bold; border-left: 3px solid var(--accent); padding-left: 10px; }
+
+        /* --- 5. CONTENIDO PRINCIPAL --- */
+        .content-area {
+            padding: 30px 40px;
+            overflow: hidden; /* Evita scroll horizontal indeseado en el body */
+        }
+
+        h2 { margin-bottom: 20px; font-size: 1.5rem; }
+
+        /* --- 6. CARRUSEL HORIZONTAL (SCROLL) --- */
+        .horizontal-scroll {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto; /* Scroll lateral */
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            
+            /* Ocultar barra scroll fea */
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-panel);
+        }
+
+        .trending-card {
+            flex: 0 0 300px; /* Ancho fijo, no encoger */
+            height: 170px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .trending-card:hover { transform: scale(1.05); z-index: 10; }
+        
+        .trending-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+        .trending-card h3 {
+            position: absolute; bottom: 15px; left: 15px;
+            font-size: 1.2rem; text-shadow: 2px 2px 4px black;
+        }
+
+        /* --- 7. GRID DE PELÍCULAS (AUTO-RESPONSIVE) --- */
+        .movies-grid {
+            display: grid;
+            /* Magia responsive: columnas de min 200px que rellenan el hueco */
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        /* --- 8. TARJETA COMPLEJA (POSICIONAMIENTO) --- */
+        .movie-poster {
+            position: relative; /* Padre relativo para los hijos absolutos */
+            aspect-ratio: 2/3; /* Relación de aspecto póster */
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .movie-poster:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+
+        .movie-poster img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Badge "NUEVO" (Absolute) */
+        .badge-new {
+            position: absolute;
+            top: 10px; right: 10px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 0.7rem; font-weight: bold;
+            padding: 3px 8px; border-radius: 3px;
+        }
+
+        /* Overlay degradado con info (Absolute bottom) */
+        .info-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(to top, black, transparent);
+            padding: 20px 10px 10px;
+            opacity: 0; /* Invisible por defecto */
+            transition: 0.3s;
+        }
+        .movie-poster:hover .info-overlay { opacity: 1; } /* Visible al hover */
+
+        /* --- 9. FORMULARIO NEWSLETTER --- */
+        .newsletter-section {
+            background-color: var(--bg-panel);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-inline {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .form-inline input {
+            padding: 15px; flex: 1; max-width: 400px;
+            border: none; border-radius: 4px;
+        }
+        
+        .btn-cta {
+            padding: 15px 30px; background-color: var(--accent);
+            color: white; border: none; font-weight: bold;
+            cursor: pointer; text-transform: uppercase;
+        }
+
+        /* --- 10. BOTÓN FLOTANTE (CHAT) --- */
+        .fab-chat {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            width: 60px; height: 60px;
+            background-color: #25D366; /* Verde WhatsApp */
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: pointer; z-index: 2000; transition: 0.3s;
+        }
+        .fab-chat:hover { transform: scale(1.1); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .main-layout { grid-template-columns: 1fr; } /* Layout a 1 columna */
+            .sidebar { display: none; } /* Ocultamos sidebar en móvil (o la haríamos menú hamburguesa) */
+            .top-navbar { padding: 0 20px; }
+            .content-area { padding: 20px; }
+            .form-inline { flex-direction: column; }
+            .form-inline input { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-navbar">
+        <div class="logo">CineStream</div>
+        <div class="user-menu">
+            <span>Matti Ahola</span>
+            <div class="avatar"></div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        
+        <aside class="sidebar">
+            <div class="menu-group">
+                <div class="menu-title">Navegación</div>
+                <a href="#inicio" class="active">🏠 Inicio</a>
+                <a href="#tendencias">🔥 Tendencias</a>
+                <a href="#recomendadas">⭐ Mejor Valoradas</a>
+                <a href="#proximamente">🎬 Próximamente</a>
+            </div>
+            <div class="menu-group">
+                <div class="menu-title">Géneros</div>
+                <a href="#accion">Acción</a>
+                <a href="#comedia">Comedia</a>
+                <a href="#drama">Drama</a>
+                <a href="#scifi">Ciencia Ficción</a>
+                <a href="#terror">Terror</a>
+            </div>
+        </aside>
+
+        <main class="content-area" id="inicio">
+            
+            <h2>Tendencias Ahora</h2>
+            <div class="horizontal-scroll" id="tendencias">
+                <div class="trending-card" style="background: #333;">
+                    <img src="https://via.placeholder.com/300x170/550000/ffffff?text=Serie+1" alt="Serie 1">
+                    <h3>Stranger Things</h3>
+                </div>
+                <div class="trending-card" style="background: #333;">
+                    <img src="https://via.placeholder.com/300x170/005500/ffffff?text=Serie+2" alt="Serie 2">
+                    <h3>The Mandalorian</h3>
+                </div>
+                <div class="trending-card" style="background: #333;">
+                    <img src="https://via.placeholder.com/300x170/000055/ffffff?text=Serie+3" alt="Serie 3">
+                    <h3>The Witcher</h3>
+                </div>
+                <div class="trending-card" style="background: #333;">
+                    <img src="https://via.placeholder.com/300x170/555500/ffffff?text=Serie+4" alt="Serie 4">
+                    <h3>Succession</h3>
+                </div>
+            </div>
+
+            <h2>Películas Recomendadas</h2>
+            <div class="movies-grid" id="recomendadas">
+                <article class="movie-poster" id="accion">
+                    <span class="badge-new">NUEVO</span>
+                    <img src="https://via.placeholder.com/200x300/222/fff?text=Accion" alt="Acción">
+                    <div class="info-overlay">
+                        <h4>Misión Imposible</h4>
+                        <p style="font-size: 0.8rem; color: #aaa;">2024 • 2h 15m</p>
+                    </div>
+                </article>
+
+                <article class="movie-poster" id="drama">
+                    <img src="https://via.placeholder.com/200x300/222/fff?text=Drama" alt="Drama">
+                    <div class="info-overlay">
+                        <h4>El Padrino</h4>
+                        <p style="font-size: 0.8rem; color: #aaa;">1972 • 3h 00m</p>
+                    </div>
+                </article>
+
+                <article class="movie-poster" id="scifi">
+                    <span class="badge-new">HD</span>
+                    <img src="https://via.placeholder.com/200x300/222/fff?text=SciFi" alt="Ciencia Ficción">
+                    <div class="info-overlay">
+                        <h4>Dune Part 2</h4>
+                        <p style="font-size: 0.8rem; color: #aaa;">2024 • 2h 45m</p>
+                    </div>
+                </article>
+
+                <article class="movie-poster" id="terror">
+                    <img src="https://via.placeholder.com/200x300/222/fff?text=Terror" alt="Terror">
+                    <div class="info-overlay">
+                        <h4>Alien</h4>
+                        <p style="font-size: 0.8rem; color: #aaa;">1979 • 1h 57m</p>
+                    </div>
+                </article>
+
+                <article class="movie-poster" id="comedia">
+                    <img src="https://via.placeholder.com/200x300/222/fff?text=Comedia" alt="Comedia">
+                    <div class="info-overlay">
+                        <h4>Superbad</h4>
+                        <p style="font-size: 0.8rem; color: #aaa;">2007 • 1h 53m</p>
+                    </div>
+                </article>
+            </div>
+
+            <h2 id="proximamente">Próximamente</h2>
+            <div class="movies-grid">
+                <article class="movie-poster">
+                    <img src="https://via.placeholder.com/200x300/222/fff?text=Trailer+1" alt="Trailer 1">
+                    <div class="info-overlay"><h4>Ocean Deep</h4></div>
+                </article>
+                <article class="movie-poster">
+                    <img src="https://via.placeholder.com/200x300/222/fff?text=Trailer+2" alt="Trailer 2">
+                    <div class="info-overlay"><h4>Skyward</h4></div>
+                </article>
+                <article class="movie-poster">
+                    <img src="https://via.placeholder.com/200x300/222/fff?text=Trailer+3" alt="Trailer 3">
+                    <div class="info-overlay"><h4>Night Run</h4></div>
+                </article>
+            </div>
+
+            <section class="newsletter-section">
+                <h3>¿Quieres ver más?</h3>
+                <p style="color: #aaa;">Suscríbete para recibir los estrenos semanales.</p>
+                <form class="form-inline">
+                    <input type="email" placeholder="Tu correo electrónico...">
+                    <button type="submit" class="btn-cta">Suscribirse</button>
+                </form>
+            </section>
+
+            <footer style="margin-top: 50px; text-align: center; color: #555; font-size: 0.8rem;">
+                <p>CineStream © 2025 - Proyecto de Examen</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <div class="fab-chat">💬</div>
+
+</body>
+</html>

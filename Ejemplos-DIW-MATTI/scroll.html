@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Snap - Presentación</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* CONTENEDOR MAESTRO */
+        html, body {
+            height: 100%; /* Obligatorio para que funcione el snap en body */
+            overflow: hidden; /* Ocultamos la barra de scroll nativa (opcional) */
+        }
+
+        .container {
+            height: 100vh;
+            overflow-y: scroll; /* Habilitamos scroll vertical */
+            
+            /* --- LA MAGIA DEL SNAP --- */
+            /* 'y' = eje vertical, 'mandatory' = obliga a encajar siempre */
+            scroll-snap-type: y mandatory; 
+            scroll-behavior: smooth;
+        }
+
+        /* CADA SECCIÓN (DIAPOSITIVA) */
+        section {
+            height: 100vh; /* Ocupa toda la pantalla */
+            width: 100%;
+            
+            /* Alineación del contenido */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            font-family: 'Arial Black', sans-serif;
+            
+            /* --- PUNTO DE ANCLAJE --- */
+            /* Dice: "Cuando dejes de hacer scroll, alinea el inicio de este div con la pantalla" */
+            scroll-snap-align: start; 
+        }
+
+        /* Estilos visuales para diferenciar secciones */
+        #seccion1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        #seccion2 { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); color: #333; }
+        #seccion3 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); color: #333; }
+        #seccion4 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); color: #333; }
+
+        h1 { font-size: 4rem; margin-bottom: 20px; }
+        p { font-size: 1.5rem; font-weight: normal; font-family: Arial, sans-serif; max-width: 600px; }
+
+        /* Indicador de Scroll (Flecha) */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            font-size: 2rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <section id="seccion1">
+            <h1>BIENVENIDO</h1>
+            <p>Haz scroll hacia abajo. Notarás que la página se "imanta" a la siguiente sección.</p>
+            <div class="scroll-down">⬇</div>
+        </section>
+
+        <section id="seccion2">
+            <h1>CSS SCROLL SNAP</h1>
+            <p>Ideal para portafolios, presentaciones de productos o historias visuales.</p>
+        </section>
+
+        <section id="seccion3">
+            <h1>SIN JAVASCRIPT</h1>
+            <p>Todo esto funciona nativamente con dos líneas de CSS.</p>
+        </section>
+
+        <section id="seccion4">
+            <h1>FIN</h1>
+            <p>Has llegado al final de la presentación.</p>
+            <a href="#seccion1" style="margin-top: 20px; padding: 10px 20px; background: white; text-decoration: none; color: black; border-radius: 5px;">Volver arriba</a>
+        </section>
+    </div>
+
+</body>
+</html>

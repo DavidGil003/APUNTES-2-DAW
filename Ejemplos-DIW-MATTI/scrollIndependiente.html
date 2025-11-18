@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>WebChat Layout</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; overflow: hidden; }
+
+        /* --- BARRA LATERAL (IZQUIERDA) --- */
+        .sidebar {
+            width: 350px;
+            background-color: white;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column; /* Header arriba, lista abajo */
+        }
+
+        .sidebar-header {
+            background-color: #f0f2f5;
+            padding: 15px;
+            height: 60px;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .chat-list {
+            /* Aquí está el truco del scroll independiente */
+            flex: 1; /* Ocupa todo el espacio restante de la sidebar */
+            overflow-y: auto; /* Si hay muchos chats, aparece scroll solo aquí */
+        }
+
+        .chat-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f2f5;
+            cursor: pointer;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .chat-item:hover { background-color: #f5f5f5; }
+        .avatar { width: 40px; height: 40px; background: #ccc; border-radius: 50%; }
+
+        /* --- ZONA PRINCIPAL (DERECHA) --- */
+        .main-chat {
+            flex: 1; /* Ocupa el resto del ancho de la pantalla */
+            display: flex;
+            flex-direction: column;
+            background-color: #e5ddd5; /* Color fondo WhatsApp clásico */
+        }
+
+        .chat-header {
+            height: 60px;
+            background-color: #f0f2f5;
+            padding: 10px 20px;
+            display: flex; align-items: center; gap: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .messages-area {
+            /* Scroll independiente para los mensajes */
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            
+            /* Imagen de fondo repetida */
+            background-image: radial-gradient(#ddd 1px, transparent 1px); 
+            background-size: 20px 20px;
+        }
+
+        /* Burbujas de mensaje */
+        .message {
+            max-width: 60%;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            position: relative;
+        }
+        
+        .received { align-self: flex-start; background-color: white; border-top-left-radius: 0; }
+        .sent { align-self: flex-end; background-color: #dcf8c6; border-top-right-radius: 0; }
+
+        /* FECHA FLOTANTE (STICKY DENTRO DEL CHAT) */
+        .date-divider {
+            align-self: center;
+            background-color: #e1f3fb;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            color: #555;
+            margin: 10px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            
+            /* Esto hace que la fecha se quede pegada arriba al hacer scroll */
+            position: sticky;
+            top: 10px;
+            z-index: 5;
+        }
+
+        /* INPUT AREA */
+        .chat-input {
+            height: 60px;
+            background-color: #f0f2f5;
+            padding: 10px 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">Mis Chats</div>
+        <div class="chat-list">
+            <div class="chat-item"><div class="avatar" style="background: #3498db"></div><div><p><b>Juan Pérez</b><br>Hola, ¿cómo estás?</p></div></div>
+            <div class="chat-item"><div class="avatar" style="background: #e74c3c"></div><div><p><b>María García</b><br>Nos vemos mañana.</p></div></div>
+            <div class="chat-item"><div class="avatar" style="background: #9b59b6"></div><div><p><b>Grupo de Trabajo</b><br>Archivo enviado.</p></div></div>
+            <div class="chat-item"><div class="avatar"></div><div><p><b>Mamá</b><br>Llámame.</p></div></div>
+            <div class="chat-item"><div class="avatar"></div><div><p><b>Cliente 1</b><br>Presupuesto ok.</p></div></div>
+            <div class="chat-item"><div class="avatar"></div><div><p><b>Soporte</b><br>Ticket cerrado.</p></div></div>
+            <div class="chat-item"><div class="avatar"></div><div><p><b>Gimnasio</b><br>Clase cancelada.</p></div></div>
+            <div class="chat-item"><div class="avatar"></div><div><p><b>Amazon</b><br>Tu paquete llega hoy.</p></div></div>
+            <div class="chat-item"><div class="avatar"></div><div><p><b>Amazon</b><br>Tu paquete llega hoy.</p></div></div>
+            <div class="chat-item"><div class="avatar"></div><div><p><b>Amazon</b><br>Tu paquete llega hoy.</p></div></div>
+        </div>
+    </aside>
+
+    <main class="main-chat">
+        <div class="chat-header">
+            <div class="avatar" style="background: #3498db; width: 35px; height: 35px;"></div>
+            <span>Juan Pérez</span>
+        </div>
+
+        <div class="messages-area">
+            <div class="date-divider">Ayer</div>
+            <div class="message received">Hola, ¿te paso los apuntes de CSS?</div>
+            <div class="message sent">Sí, por favor. Sobre todo lo de Flexbox.</div>
+            
+            <div class="date-divider">Hoy</div>
+            <div class="message received">Aquí tienes el archivo.</div>
+            <div class="message received">¿Viste el ejercicio de Scroll?</div>
+            <div class="message sent">Lo estoy mirando ahora.</div>
+            <div class="message sent">¡Mola mucho que la fecha se quede pegada arriba con sticky!</div>
+            <div class="message received">¡Exacto! Es super útil.</div>
+            
+            <div class="message sent">Voy a copiar y pegar texto para llenar esto... Lorem ipsum dolor sit amet.</div>
+            <div class="message received">Consectetur adipiscing elit.</div>
+            <div class="message sent">Sed do eiusmod tempor incididunt ut labore.</div>
+            <div class="message received">Ut enim ad minim veniam.</div>
+            <div class="message sent">Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+            <div class="message received">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
+            <div class="message sent">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" placeholder="Escribe un mensaje aquí...">
+            <button style="border:none; background:none; font-size: 1.2rem; cursor: pointer;">➤</button>
+        </div>
+    </main>
+
+</body>
+</html>
