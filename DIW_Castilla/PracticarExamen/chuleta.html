@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTER CV - CHULETA EXAMEN</title>
+    <style>
+        /* --- 1. VARIABLES Y RESET --- */
+        :root {
+            --main-color: #2563eb;
+            --bg-color: #f3f4f6;
+            --text-color: #1f2937;
+            --white: #ffffff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+        
+        /* --- 2. LAYOUT TIPO PAPEL (A4 centrado) --- */
+        .cv-container {
+            max-width: 900px;
+            background: var(--white);
+            margin: 40px auto;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 2fr; /* Columna izq estrecha, der ancha */
+            gap: 40px;
+        }
+
+        /* --- 3. COLUMNA LATERAL (FOTO Y SKILLS) --- */
+        .sidebar { text-align: center; }
+        
+        .profile-pic {
+            width: 150px; height: 150px;
+            background: #ddd; border-radius: 50%;
+            margin: 0 auto 20px; border: 5px solid var(--main-color);
+            /* Truco para centrar imagen si la pones */
+            object-fit: cover; 
+        }
+
+        .section-title {
+            text-align: left;
+            border-bottom: 2px solid var(--main-color);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--main-color);
+        }
+
+        /* BARRAS DE PROGRESO (SKILLS) */
+        .skill-box { text-align: left; margin-bottom: 15px; }
+        .skill-name { font-size: 0.9rem; font-weight: bold; display: flex; justify-content: space-between; }
+        .progress-bg {
+            background: #e5e7eb; height: 10px;
+            border-radius: 5px; overflow: hidden; margin-top: 5px;
+        }
+        .progress-bar {
+            height: 100%; background: var(--main-color);
+            /* El ancho se define en el HTML style="width: X%" */
+        }
+
+        /* --- 4. CONTENIDO PRINCIPAL (TIMELINE) --- */
+        .main-content h1 { font-size: 2.5rem; margin-bottom: 5px; }
+        .main-content h3 { color: #6b7280; margin-bottom: 30px; font-weight: normal; }
+
+        /* TIMELINE CSS (Línea de tiempo) - ¡Muy común en exámenes! */
+        .timeline-item {
+            position: relative;
+            padding-left: 30px; /* Espacio para la línea */
+            margin-bottom: 30px;
+            border-left: 2px solid var(--main-color); /* La línea vertical */
+        }
+        /* La bolita de la línea de tiempo */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px; /* Ajustar para centrar sobre la línea de 2px */
+            top: 0;
+            width: 10px; height: 10px;
+            background: var(--main-color);
+            border-radius: 50%;
+        }
+        .date { font-size: 0.85rem; color: #6b7280; font-style: italic; }
+        .job-title { font-weight: bold; font-size: 1.1rem; }
+
+        /* --- 5. FORMULARIO CON VALIDACIÓN VISUAL --- */
+        .contact-form {
+            background: #f9fafb; padding: 20px; border-radius: 8px; margin-top: 20px;
+        }
+        input, textarea {
+            width: 100%; padding: 10px; margin-bottom: 10px;
+            border: 1px solid #ccc; border-radius: 4px; outline: none;
+        }
+        
+        /* Truco Examen: Bordes cambian si es válido o no */
+        input:focus:invalid { border-color: red; background: #fff5f5; }
+        input:required:valid { border-color: green; background: #f0fdf4; }
+
+        .btn-print {
+            display: block; width: 100%; padding: 10px;
+            background: #1f2937; color: white; border: none;
+            cursor: pointer; margin-top: 10px;
+        }
+
+        /* --- 6. MEDIA QUERY: MÓVIL --- */
+        @media (max-width: 768px) {
+            .cv-container { grid-template-columns: 1fr; margin: 0; padding: 20px; }
+            .sidebar { order: 1; } /* Foto primero */
+            .main-content { order: 2; }
+        }
+
+        /* --- 7. MEDIA QUERY: IMPRESIÓN (Vital para exámenes de CV) --- */
+        @media print {
+            body { background: white; }
+            .cv-container { box-shadow: none; margin: 0; width: 100%; max-width: 100%; border: none; }
+            .btn-print, .contact-form { display: none; } /* Ocultar botones y form al imprimir */
+            .progress-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; } /* Forzar color de fondo */
+            a { text-decoration: none; color: black; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cv-container">
+        
+        <aside class="sidebar">
+            <img src="https://via.placeholder.com/150" alt="Foto Perfil" class="profile-pic">
+            
+            <h4 class="section-title">Contacto</h4>
+            <p>📞 600 123 456</p>
+            <p>📧 email@test.com</p>
+            <p>📍 Sevilla, España</p>
+            <br>
+
+            <h4 class="section-title">Habilidades</h4>
+            
+            <div class="skill-box">
+                <div class="skill-name"><span>HTML/CSS</span> <span>90%</span></div>
+                <div class="progress-bg">
+                    <div class="progress-bar" style="width: 90%;"></div>
+                </div>
+            </div>
+            
+            <div class="skill-box">
+                <div class="skill-name"><span>Flexbox</span> <span>85%</span></div>
+                <div class="progress-bg">
+                    <div class="progress-bar" style="width: 85%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <div class="skill-name"><span>JavaScript</span> <span>60%</span></div>
+                <div class="progress-bg">
+                    <div class="progress-bar" style="width: 60%;"></div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <h1>Alejandro Castilla</h1>
+            <h3>Desarrollador Web Full Stack</h3>
+            
+            <h4 class="section-title">Experiencia Laboral</h4>
+            
+            <div class="timeline-item">
+                <div class="date">2023 - Presente</div>
+                <div class="job-title">Senior Developer - Google</div>
+                <p>Desarrollo de interfaces responsivas y accesibles.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="date">2020 - 2023</div>
+                <div class="job-title">Junior Developer - Startup</div>
+                <p>Maquetación con CSS Grid y mantenimiento web.</p>
+            </div>
+
+            <h4 class="section-title">Formación</h4>
+            <div class="timeline-item">
+                <div class="date">2018 - 2020</div>
+                <div class="job-title">Grado Superior DAW</div>
+                <p>IES Virgen de la Paz</p>
+            </div>
+
+            <div class="contact-form">
+                <h4 style="margin-bottom: 10px;">Contáctame ahora</h4>
+                <form>
+                    <label>Nombre (Requerido):</label>
+                    <input type="text" required placeholder="Escribe algo para ver borde verde">
+                    
+                    <label>Email (Valida formato):</label>
+                    <input type="email" required placeholder="Pon un email mal para ver borde rojo">
+                    
+                    <button type="button" class="btn-print" onclick="window.print()">🖨️ IMPRIMIR CV</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

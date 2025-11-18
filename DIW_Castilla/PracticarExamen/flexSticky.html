@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2: Layout Flexbox Avanzado</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* 1. El contenedor padre debe ocupar toda la pantalla */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* CRUCIAL PARA EXAMEN */
+            font-family: sans-serif;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 20px;
+            /* Sticky header: se queda pegado arriba al hacer scroll */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* Contenedor central que tiene los laterales y el main */
+        .main-container {
+            display: flex;
+            flex: 1; /* Esto hace que ocupe todo el espacio sobrante empujando el footer abajo */
+            flex-wrap: wrap; /* Para móvil */
+        }
+
+        .sidebar {
+            background: #f4f4f4;
+            flex: 1; /* Ocupa 1 parte */
+            padding: 20px;
+            min-width: 200px;
+        }
+
+        .content {
+            background: white;
+            flex: 3; /* Ocupa 3 partes (es 3 veces más ancho que el sidebar) */
+            padding: 20px;
+        }
+
+        .ads {
+            background: #ddd;
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centrar items horizontalmente en columna */
+        }
+
+        .ad-box {
+            width: 100%;
+            height: 100px;
+            background: #bbb;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Responsive: En móviles todo columna */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .sidebar, .content, .ads {
+                flex: auto; /* Reseteamos el flex */
+                width: 100%;
+            }
+            /* Reordenar visualmente sin cambiar HTML (Pregunta típica) */
+            .content { order: 1; }
+            .sidebar { order: 2; }
+            .ads { order: 3; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Cabecera Sticky (Haz scroll)</h1>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <h3>Menú</h3>
+            <ul>
+                <li>Opción A</li>
+                <li>Opción B</li>
+                <li>Opción C</li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h2>Contenido Principal</h2>
+            <p>Añade mucho texto aquí para probar que el footer baja, o poco texto para ver que el footer se queda abajo gracias al <code>min-height: 100vh</code>.</p>
+            <p>Lorem ipsum dolor sit amet...</p>
+            <br><br><br><br><br>
+            <p>Más contenido...</p>
+        </main>
+
+        <aside class="ads">
+            <h3>Publicidad</h3>
+            <div class="ad-box">Anuncio 1</div>
+            <div class="ad-box">Anuncio 2</div>
+        </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 - Este footer siempre está al final</p>
+    </footer>
+
+</body>
+</html>

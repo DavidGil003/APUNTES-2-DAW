@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<body style="display: flex;justify-content: center;">
+
+    <form method="post" action="https://www.google.com/">
+        <h2 style="color: black;">PEDIR CITA MÉDICA </h2>
+        <fieldset style="width: 100%;">
+            <fieldset>
+                <legend>Ingrese sus datos personales</legend>
+                <label style="display: inline-block;width: 120px;text-align: right;margin-right: 10px;" required>Nombre:
+                </label>
+                <input type="text" id="nombre"
+                    style="border:1px solid;margin-bottom: 10px;box-shadow: inset 2px 2px 4px gray;width:70%;" placeholder="Introduzca su nombre"><br>
+
+                <label style="display: inline-block;width: 120px;text-align: right;margin-right: 10px;">Apellidos:
+                </label>
+                <input type="text" id="apellidos"
+                    style="border:1px solid;margin-bottom: 10px;box-shadow: inset 2px 2px 4px gray;width:70%;" placeholder="Introduzca sus apellidos"><br>
+
+                <label style="display: inline-block;width: 120px;text-align: right;margin-right: 10px;">e-mail: </label>
+                <input type="email" id="e-mail"
+                    style="border:1px solid;margin-bottom: 10px;box-shadow: inset 2px 2px 4px gray;width:70%;" placeholder="Introduzca su email"><br>
+
+                <label style="display: inline-block;width: 120px;text-align: right;margin-right: 10px;">DNI: </label>
+                <input type="text" id="dni"
+                    style="border:1px solid;margin-bottom: 10px;box-shadow: inset 2px 2px 4px gray;width:70%;" placeholder="Introduzca su DNI"
+                    required><br>
+
+                <label style="display: inline-block;width: 120px;text-align: right;margin-right: 10px;">SIP: </label>
+                <input type="text" id="sip"
+                    style="border:1px solid;margin-bottom: 10px;box-shadow: inset 2px 2px 4px gray;width:70%;" placeholder="Introduzca su SIP"
+                    required><br>
+
+
+
+            </fieldset>
+<br><br>
+                <fieldset style="width: 30%;">
+                    <legend>Sexo</legend>
+                    <input type="radio" value="hombre" id="hombre" name="sexo">
+                    <label for="hombre">Hombre</label>
+                    <input type="radio" value="mujer" id="mujer" name="sexo" checked>
+                    <label for="mujer">Mujer</label>
+
+
+                </fieldset>
+
+            <br><br>
+            <fieldset>
+
+                <legend>Información requerida</legend>
+
+                <label>Indique el motivo de su visita: </label>
+                <input list="cosas" />
+                <datalist id="cosas">
+
+                    <option value="Enfermedad"></option>
+                    <option value="Malestar"></option>
+                    <option value="Traumatismo"></option>
+                    <option value="Otro"></option>
+                </datalist>
+
+                <br><br>
+              
+                <label style="display:inline-block;width:220px;text-align:right;margin-right:10px;">¿Desea recordatorio?</label>
+                <input type="checkbox" id="recordatorio" name="recordatorio" value="si">
+                <label for="recordatorio">Sí, enviar recordatorio por e-mail</label>
+
+                <br><br>
+                <label>Especifíca detalladamente los motivos de su visita: </label><br>
+                <textarea style = "height:100px" placeholder="Introduzca su motivo" cols="60"></textarea>
+
+                <br><br>
+                <button type="submit" id="enviarCita" style="padding:8px 16px;background-color:#4CAF50;color:white;border:none;border-radius:4px;cursor:pointer;">Enviar cita</button>
+            </fieldset>
+        </fieldset>
+        </fieldset>
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1: Factura Compleja</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        
+        /* Estilo de tabla de examen */
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse; /* CRUCIAL para que no haya doble borde */
+        }
+        
+        th, td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: left;
+        }
+
+        /* Encabezados con color */
+        th {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+
+        /* Inputs "invisibles" para que parezca papel */
+        .input-celda {
+            width: 95%;
+            border: none;
+            background-color: #f9f9f9;
+            padding: 5px;
+            border-bottom: 1px dashed #ccc; /* Solo línea abajo */
+        }
+
+        .total-row {
+            background-color: #ecf0f1;
+            font-weight: bold;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+    <form>
+        <table>
+            <tr>
+                <th colspan="4">FACTURA SIMPLIFICADA Nº <input type="text" size="5"></th>
+            </tr>
+            
+            <tr>
+                <td rowspan="2" style="width: 20%; vertical-align: top;">
+                    <b>Datos Cliente:</b><br>
+                    <small>Rellene todos los campos</small>
+                </td>
+                <td colspan="3">
+                    <label>Nombre:</label>
+                    <input type="text" class="input-celda">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <label>Dirección:</label>
+                    <input type="text" class="input-celda">
+                </td>
+            </tr>
+
+            <tr>
+                <th style="width: 10%;">Cant.</th>
+                <th style="width: 50%;">Descripción</th>
+                <th style="width: 20%;">Precio Unit.</th>
+                <th style="width: 20%;">Total</th>
+            </tr>
+
+            <tr>
+                <td><input type="number" value="1" style="width: 50px;"></td>
+                <td>Diseño Web Responsive</td>
+                <td>500 €</td>
+                <td>500 €</td>
+            </tr>
+            <tr>
+                <td><input type="number" value="2" style="width: 50px;"></td>
+                <td>Mantenimiento mensual</td>
+                <td>50 €</td>
+                <td>100 €</td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="border: none;"></td> <td class="total-row">Base Imponible</td>
+                <td>600 €</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border: none;"></td>
+                <td class="total-row">IVA (21%)</td>
+                <td>126 €</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; border: 1px solid #333;">
+                    <label><input type="checkbox"> Acepto términos</label>
+                </td>
+                <td class="total-row" style="background-color: #2c3e50; color: white;">TOTAL A PAGAR</td>
+                <td style="font-weight: bold; font-size: 1.2em;">726 €</td>
+            </tr>
+        </table>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" style="padding: 10px 20px; background: green; color: white; border: none;">Enviar Factura</button>
+        </div>
+    </form>
+
+</body>
+</html>

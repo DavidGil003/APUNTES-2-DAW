@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Planes de Precios</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+
+        h1 { color: white; text-align: center; margin-bottom: 10px; font-size: 2.5rem; }
+        p.subtitle { color: rgba(255,255,255,0.8); text-align: center; margin-bottom: 50px; max-width: 600px; }
+
+        /* --- CONTENEDOR DE TARJETAS (FLEXBOX) --- */
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Alineación vertical central para que la del medio crezca */
+            flex-wrap: wrap; /* Para que bajen en móvil */
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            width: 300px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Tarjeta destacada (Popular) */
+        .plan-card.popular {
+            background: #222; /* Invertir colores */
+            color: white;
+            transform: scale(1.1); /* Hacemos esta más grande */
+            z-index: 10;
+            border: 2px solid #764ba2;
+        }
+        
+        /* Hover en tarjetas normales */
+        .plan-card:not(.popular):hover {
+            transform: translateY(-10px);
+        }
+
+        .plan-name { text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 20px; opacity: 0.7; }
+        .plan-price { font-size: 3.5rem; font-weight: bold; margin-bottom: 20px; }
+        .plan-period { font-size: 1rem; font-weight: normal; opacity: 0.6; }
+        
+        .features { list-style: none; margin-bottom: 30px; padding: 0; }
+        .features li { padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .popular .features li { border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            width: 100%;
+            transition: 0.3s;
+        }
+        
+        .btn-outline { border: 2px solid #222; color: #222; }
+        .btn-outline:hover { background: #222; color: white; }
+
+        .btn-fill { background: #764ba2; color: white; border: none; }
+        .btn-fill:hover { background: #5b3a7d; }
+
+        /* --- SECCIÓN CONTACTO (GRID ABAJO) --- */
+        .contact-section {
+            margin-top: 80px;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 columnas */
+            gap: 20px;
+        }
+        .full-width { grid-column: span 2; } /* Ocupa 2 columnas */
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .plan-card.popular { transform: scale(1); margin: 20px 0; } /* Quitar efecto scale en móvil */
+            .contact-form { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Elige tu plan ideal</h1>
+    <p class="subtitle">Sin contratos de permanencia. Cancela cuando quieras.</p>
+
+    <div class="pricing-container">
+        
+        <div class="plan-card">
+            <div class="plan-name">Básico</div>
+            <div class="plan-price">0€<span class="plan-period">/mes</span></div>
+            <ul class="features">
+                <li>1 Usuario</li>
+                <li>5GB Almacenamiento</li>
+                <li>Soporte por Email</li>
+                <li style="text-decoration: line-through; opacity: 0.4;">Analíticas Avanzadas</li>
+            </ul>
+            <a href="#" class="btn btn-outline">Empezar Gratis</a>
+        </div>
+
+        <div class="plan-card popular">
+            <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #764ba2; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">MÁS VENDIDO</div>
+            <div class="plan-name">Profesional</div>
+            <div class="plan-price">29€<span class="plan-period">/mes</span></div>
+            <ul class="features">
+                <li>5 Usuarios</li>
+                <li>100GB Almacenamiento</li>
+                <li>Soporte Prioritario 24/7</li>
+                <li>Analíticas Avanzadas</li>
+            </ul>
+            <a href="#" class="btn btn-fill">Seleccionar Plan</a>
+        </div>
+
+        <div class="plan-card">
+            <div class="plan-name">Empresa</div>
+            <div class="plan-price">99€<span class="plan-period">/mes</span></div>
+            <ul class="features">
+                <li>Usuarios Ilimitados</li>
+                <li>1TB Almacenamiento</li>
+                <li>Gestor de Cuenta</li>
+                <li>API Access</li>
+            </ul>
+            <a href="#" class="btn btn-outline">Contactar Ventas</a>
+        </div>
+
+    </div>
+
+    <section class="contact-section">
+        <h2 style="color: #333; text-align: center; margin-bottom: 20px;">¿Dudas? Escríbenos</h2>
+        <form class="contact-form">
+            <div>
+                <label>Nombre</label>
+                <input type="text" placeholder="Tu nombre">
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="email" placeholder="tu@email.com">
+            </div>
+            <div class="full-width">
+                <label>Asunto</label>
+                <select style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px;">
+                    <option>Duda sobre pagos</option>
+                    <option>Soporte técnico</option>
+                    <option>Otro</option>
+                </select>
+            </div>
+            <div class="full-width">
+                <label>Mensaje</label>
+                <textarea rows="4"></textarea>
+            </div>
+            <div class="full-width">
+                <button type="submit" class="btn btn-fill" style="cursor: pointer;">Enviar Mensaje</button>
+            </div>
+        </form>
+    </section>
+
+</body>
+</html>

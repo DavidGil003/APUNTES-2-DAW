@@ -1,0 +1,290 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- 1. Header (Barra de Navegación Superior) --- */
+        .main-header {
+            background-color: #34495e;
+            color: #fff;
+            padding: 1rem 0;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .main-header .main-nav ul {
+            display: flex;
+        }
+
+        .main-header .main-nav ul li {
+            margin-left: 20px;
+        }
+
+        .main-header .main-nav a {
+            padding: 5px;
+            color: #f4f4f4;
+        }
+
+        .main-header .main-nav a:hover {
+            color: #fff;
+            border-bottom: 1px solid #fff;
+        }
+
+        /* --- 2. Hero Section (Bienvenida) --- */
+        .hero {
+            background: linear-gradient(90deg, #9b59b6 0%, #3498db 100%);
+            color: #fff;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+        }
+
+        /* --- 3. Contenido Principal (Dos Columnas) --- */
+        .main-content {
+            /* CORRECCIÓN: Faltaba el fondo gris que habías pedido */
+            padding: 3rem 0;
+        }
+
+        .main-content .two-columns {
+            display: flex;
+            gap: 2rem;
+            /* AÑADIDO: Alinear al inicio para que la sidebar no se estire */
+            align-items: flex-start;
+        }
+
+        .main-content .sidebar {
+            flex-basis: 25%;
+            background: #e8e8e8;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+        .main-content .sidebar ul li a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: #333;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .main-content .sidebar ul li a:hover {
+            background-color: #ddd;
+            color: #111;
+        }
+
+        .main-content .content-area {
+            flex-basis: 75%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Espacio entre las tarjetas */
+        }
+
+        .main-content .article {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-content .article h2 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .main-content .article p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* --- 4. Servicios (Tres Columnas) --- */
+        .services {
+            padding: 3rem 0;
+            background-color: #fff;
+        }
+
+        .services .three-columns {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: linear-gradient(90deg, #9b59b6 0%, #3498db 100%);
+            color: #fff;
+            padding: 2rem 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .service-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+        }
+
+        /* --- 5. Galería (Tres Columnas) --- */
+        .gallery {
+            padding: 0rem 0 3rem 0;
+            background-color: #fff;
+        }
+
+        .gallery .three-columns {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .gallery .gallery-item {
+            flex: 1;
+        }
+
+        .gallery .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* --- 6. Footer --- */
+        .main-footer {
+            background-color: #34495e;
+            color: #ccc;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .main-footer .social-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .main-footer .social-links p {
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .main-footer .social-links ul {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .main-footer .social-links a {
+            color: #fff;
+            font-weight: bold;
+        }
+        .main-footer .social-links a:hover {
+            color: #3498db;
+        }
+
+        .main-footer .newsletter p {
+            margin-bottom: 0.75rem;
+        }
+
+        .main-footer .newsletter form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .main-footer .newsletter input[type="email"] {
+            flex-grow: 1;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .main-footer .newsletter button {
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .main-footer .newsletter button:hover {
+            background-color: #e67e22;
+        }
+
+        /* --- Diseño Responsivo (Móvil) --- */
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .main-header .main-nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .main-content .two-columns {
+                flex-direction: column;
+            }
+
+            .services .three-columns,
+            .gallery .three-columns {
+                flex-direction: column;
+            }
+
+            .main-footer .newsletter form {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .main-footer .newsletter input[type="email"],
+            .main-footer .newsletter button {
+                width: 100%;
+            }
+        }

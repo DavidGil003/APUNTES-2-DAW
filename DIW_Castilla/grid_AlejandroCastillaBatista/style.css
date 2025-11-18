@@ -1,0 +1,350 @@
+/* --- Reseteo Básico y Globales --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Para el scroll suave al pulsar los enlaces del nav */
+}
+
+body {
+    /* Usamos la fuente 'Inter' si está disponible, si no, una genérica sans-serif */
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: #000; /* Fondo negro por defecto */
+    color: #f0f0f0; /* Texto claro por defecto */
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    border-radius: 8px; /* Bordes redondeados para todas las imágenes */
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 50px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff; /* Color global (se sobrescribirá en .spec-item) */
+    margin-bottom: 10px;
+}
+
+section {
+    padding: 80px 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- 1. Estilos del HÉROE --- */
+.hero {
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+
+    /* REEMPLAZAR ESTO: 
+      Usa tu imagen de fondo del cerebro/neuronas aquí.
+      He puesto un gradiente azul oscuro como reemplazo.
+    */
+     background-image: url('cerebro.jpg');
+    background-size: cover; /* cubrir todo el contenedor */
+    background-position: center; /* centrar la imagen */
+    background-repeat: no-repeat; /* evitar repetición */
+    /* Opcional: mezcla/overlay para mantener legibilidad del texto */
+    background-color: rgba(2, 12, 26, 0.45);
+    background-blend-mode: overlay;
+  /* background-image: url('tu-imagen-de-fondo.jpg'); */
+    background-size: cover;
+    background-position: center;
+}
+
+.hero::before {
+    /* Simulación del marco del teléfono */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 95%;
+    max-width: 500px; /* Ancho máximo del "teléfono" */
+    border: 10px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    pointer-events: none; /* Para que no interfiera con el clic */
+}
+
+.hero-content {
+    position: relative; /* Para que esté sobre el fondo */
+    z-index: 2;
+    /* Imagen de fondo correcta: usa url('ruta/archivo.ext')
+       Si 'cerebro.jpg' está en la misma carpeta que este CSS, la ruta relativa funciona. */
+   
+}
+
+.hero h1 {
+    font-size: 4.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+    color: #ccc;
+}
+
+.btn {
+    background-color: #0088ff; /* Azul brillante */
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 25px; /* Botón redondeado */
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #006ddc;
+    transform: translateY(-2px);
+}
+
+/* --- 1.1 Estilos de la NAVEGACIÓN --- */
+nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 0;
+    z-index: 10;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    background: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente */
+    backdrop-filter: blur(5px); /* Efecto cristal */
+    padding: 10px 20px;
+    border-radius: 30px;
+}
+
+nav li {
+    margin: 0 20px;
+}
+
+nav a {
+    color: #fff;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+nav a:hover {
+    color: #0088ff;
+}
+
+
+/* --- 2. Estilos de CARACTERÍSTICAS --- */
+
+.features {
+    background-color: #f5f5f5; /* Fondo blanco/gris muy claro para esta sección */
+    color: #333; /* Texto oscuro para esta sección */
+}
+
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 30px;
+}
+
+.feature-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+    overflow: hidden; /* Para que la imagen se ajuste a los bordes */
+    text-align: center;
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card img {
+    width: 100%;
+    height: 250px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Para que la imagen cubra el espacio */
+    margin-bottom: 20px;
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+
+/* --- 3. Estilos de GALERÍA --- */
+.gallery {
+    background-color:#fff; /* Fondo oscuro */
+    color:#000;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    gap: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 450px; /* Altura fija para las fotos */
+    object-fit: cover;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+}
+
+/* --- 4. Estilos de ESPECIFICACIONES (MODIFICADO) --- */
+.specs {
+    /* MODIFICACIÓN: Fondo gris claro (igual que .features) 
+       para que las tarjetas blancas destaquen */
+    background-color: #f5f5f5; 
+    color: #333; /* Texto oscuro por defecto */
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    gap: 30px; /* Gap igual que en .features-grid */
+}
+
+/* MODIFICACIÓN: Estilos de .feature-card aplicados a .spec-item */
+.spec-item {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+    text-align: center;
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.spec-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* MODIFICACIÓN: Regla específica para el H4 dentro de .spec-item */
+.spec-item h4 {
+    color: #333; /* Color oscuro para el título de la tarjeta */
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* MODIFICACIÓN: Color de párrafo (descripción) */
+.spec-item p {
+    color: #555; /* Color gris (igual que .feature-card p) */
+    font-size: 0.9rem;
+}
+
+
+/* --- 5. Estilos del FOOTER --- */
+footer {
+    background-color: blue;
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid #222;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+
+/* --- RESPONSIVE DESIGN (Móviles y Tablets) --- */
+@media (max-width: 992px) {
+    /* Tablet */
+    .features-grid {
+        grid-template-columns: 1fr 1fr; /* 2 columnas */
+    }
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr; /* 2 columnas */
+    }
+    .specs-grid {
+        grid-template-columns: 1fr 1fr; /* 2 columnas */
+    }
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Móvil */
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+
+    nav ul {
+        /* Ocultamos el nav de escritorio y podríamos poner un icono de hamburguesa */
+        /* Por simplicidad, lo haremos más pequeño */
+        padding: 5px 10px;
+    }
+    nav li {
+        margin: 0 5px;
+    }
+    nav a {
+        font-size: 0.8rem;
+    }
+
+    .features-grid,
+    .gallery-grid,
+    .specs-grid {
+        grid-template-columns: 1fr; /* 1 columna */
+    }
+
+    .gallery-grid img {
+        height: 350px; /* Ajustamos altura en móvil */
+    }
+}

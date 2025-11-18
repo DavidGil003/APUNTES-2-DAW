@@ -1,0 +1,91 @@
+body {
+    display: flex;
+    flex-direction: column; /* Apila verticalmente: header, main, footer */
+    min-height: 100vh;      /* Ocupa al menos toda la altura de la pantalla */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Fondo blanco/grisáceo como en la imagen */
+}
+
+
+.encabezado {
+  background-color: green;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+
+.contenido-principal {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding: 1.5rem;
+    gap: 1.5rem;
+}
+
+.columna{
+
+    display:flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#columna-izquierda{
+
+    flex:1;
+
+}
+
+#columna-derecha{
+
+    flex:2;
+}
+
+#izq-superior{
+
+background-color: yellow;
+flex:1
+}
+
+#izq-inferior{
+background-color: orange;
+flex:2;
+    
+}
+
+#der-superior{
+
+    background-color: blue;
+    flex:3;
+}
+
+#der-inferior{
+background-color: purple;
+flex:1;
+    
+}
+
+.barra-lateral {
+    background-color: #66bb6a; /* Verde claro */
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    
+    /* TRUCO CLAVE PARA LA POSICIÓN */
+    margin-left: auto;   /* Se empuja sola hasta la derecha del todo */
+    align-self: flex-end; /* Se alinea a sí misma en la parte inferior */
+}
+
+.caja {
+    padding: 2rem;
+    border-radius: 12px;
+    color: #333;
+    border-radius: 12px;
+}
+.pie-pagina {
+    background-color: #333; /* Gris oscuro */
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 6px;
+}

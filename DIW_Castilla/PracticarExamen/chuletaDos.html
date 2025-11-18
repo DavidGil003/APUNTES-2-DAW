@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es" style="scroll-behavior: smooth;"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTER LANDING - CHULETA EXAMEN</title>
+    <style>
+        /* --- 1. GLOBALES --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Helvetica, sans-serif; color: #333; background: #fff; }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- 2. HERO SECTION (Fondo Oscuro + Texto Centrado) --- */
+        .hero {
+            height: 80vh; /* 80% altura pantalla */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1920x1080');
+            background-size: cover; background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white; text-align: center; padding: 20px;
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        .btn {
+            padding: 15px 30px; background: #ff5733; color: white; font-weight: bold;
+            border-radius: 30px; transition: transform 0.3s; display: inline-block;
+        }
+        .btn:hover { transform: scale(1.1); background: #e04d2b; }
+
+        /* --- 3. ACORDEÓN DE PREGUNTAS (DETAILS/SUMMARY) - ¡Truco Examen! --- */
+        .faq-section { max-width: 800px; margin: 60px auto; padding: 20px; }
+        
+        details {
+            background: #f9f9f9; margin-bottom: 10px; border-radius: 5px;
+            overflow: hidden; border: 1px solid #eee;
+        }
+        summary {
+            padding: 15px; cursor: pointer; font-weight: bold;
+            background: #eee; list-style: none; /* Quitar triángulo por defecto */
+            display: flex; justify-content: space-between;
+        }
+        /* Añadir icono propio */
+        summary::after { content: '+'; font-size: 1.2rem; }
+        details[open] summary::after { content: '-'; }
+        
+        .faq-content { padding: 15px; background: white; color: #666; line-height: 1.6; }
+        
+        /* Animación suave al abrir */
+        details[open] summary ~ * { animation: sweep .5s ease-in-out; }
+        @keyframes sweep { 0% {opacity: 0; margin-top: -10px} 100% {opacity: 1; margin-top: 0px} }
+
+
+        /* --- 4. MODAL / POP-UP SIN JAVASCRIPT (:TARGET) - ¡Nivel Pro! --- */
+        /* El enlace debe apuntar a #miModal */
+        .modal-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); /* Fondo oscuro */
+            z-index: 9999;
+            
+            /* TRUCO: Oculto por defecto */
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity 0.3s;
+            
+            /* Centrar contenido */
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* CUANDO LA URL ES #miModal, ESTO SE ACTIVA */
+        .modal-container:target {
+            opacity: 1; visibility: visible; pointer-events: auto;
+        }
+
+        .modal-box {
+            background: white; padding: 30px; width: 90%; max-width: 500px;
+            border-radius: 10px; position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .close-btn {
+            position: absolute; top: 10px; right: 15px;
+            font-size: 20px; color: #999; font-weight: bold;
+        }
+
+        /* --- 5. FOOTER COMPLEJO CON GRID --- */
+        footer { background: #222; color: #aaa; padding: 50px 20px; margin-top: 50px; }
+        .footer-grid {
+            max-width: 1200px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+        .footer-col h4 { color: white; margin-bottom: 20px; border-bottom: 2px solid #ff5733; display: inline-block; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-col a:hover { color: #ff5733; padding-left: 5px; transition: 0.3s; }
+
+        /* --- 6. BOTÓN SCROLL TOP (FIXED) --- */
+        .scroll-top {
+            position: fixed; bottom: 20px; right: 20px;
+            background: #ff5733; color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>Landing Master</h1>
+        <p>Todo lo interactivo que necesitas sin tocar JavaScript.</p>
+        <br>
+        <a href="#miModal" class="btn">ABRIR MODAL CSS</a>
+    </section>
+
+    <section class="faq-section">
+        <h2 style="text-align: center; margin-bottom: 30px;">Preguntas Frecuentes</h2>
+        
+        <details>
+            <summary>¿Cómo funciona este acordeón?</summary>
+            <div class="faq-content">
+                Usa la etiqueta <code>&lt;details&gt;</code> y <code>&lt;summary&gt;</code> de HTML5. No requiere JS.
+            </div>
+        </details>
+
+        <details>
+            <summary>¿Es responsive?</summary>
+            <div class="faq-content">
+                Sí, todo usa unidades relativas y flexbox/grid.
+            </div>
+        </details>
+        
+        <details>
+            <summary>¿Puedo anidar elementos?</summary>
+            <div class="faq-content">
+                Claro, puedes poner imágenes, listas o lo que quieras aquí dentro.
+            </div>
+        </details>
+    </section>
+
+    <div id="miModal" class="modal-container">
+        <div class="modal-box">
+            <a href="#" class="close-btn">×</a>
+            <h2>¡Hola! Soy un Modal</h2>
+            <p>He aparecido gracias a la pseudoclase <code>:target</code>. Cuando el ID en la URL coincide con mi ID, cambio mi opacidad a 1.</p>
+            <br>
+            <a href="#" class="btn" style="font-size: 0.8rem;">Cerrar Modal</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Compañía</h4>
+                <ul>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Equipo</a></li>
+                    <li><a href="#">Carreras</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Guías</a></li>
+                    <li><a href="#">Soporte</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacidad</a></li>
+                    <li><a href="#">Términos</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p>Suscríbete para recibir novedades.</p>
+                <input type="email" placeholder="Tu email" style="width: 100%; padding: 10px; margin-top: 10px;">
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 40px; font-size: 0.8rem;">&copy; 2025 Master CheatSheet</p>
+    </footer>
+
+    <a href="#" class="scroll-top">↑</a>
+
+</body>
+</html>

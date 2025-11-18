@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica de CSS con Position (RGB)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: rgb(240, 242, 245);
+            color: rgb(51, 51, 51);               
+            line-height: 1.6;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            background-color: rgb(51, 58, 69); 
+            padding: 10px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 20; 
+        }
+
+        .header-title {
+            color: rgb(255, 255, 255); 
+            font-size: 1.5rem;
+            margin: 0 0 10px 0;
+        }
+
+        header nav ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        header nav li {
+            display: inline-block;
+            margin: 0 20px;
+        }
+
+        header nav a {
+            color: rgb(255, 255, 255); 
+            font-weight: bold;
+            transition: color 0.2s ease; 
+        }
+
+        header nav a:hover {
+         
+            text-decoration: none;
+            color: rgb(26, 188, 156); 
+        }
+
+        .welcome {
+            padding: 20px;
+        }
+        
+        .welcome h1 {
+            display: none;
+        }
+
+        .positioned-cards {
+            position: relative;
+            min-height: 150px; 
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .positioned-cards h2 {
+            position: absolute;
+            top: 20px;
+            left: 360px; 
+        }
+
+        .card {
+            position: absolute;
+            top: 20px;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(52, 152, 219); 
+            color: rgb(255, 255, 255);          
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); 
+        }
+
+        .card:hover {
+            background-color: rgb(26, 188, 156); 
+            color: rgb(255, 255, 255);           
+            transform: scale(1.05);
+        }
+
+        .card-1 { left: 20px; }
+        .card-2 { left: 130px; }
+        .card-3 { left: 240px; }
+
+        .sticky-section {
+            margin-bottom: 20px;
+            min-height: 400px;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 84px;
+            background-color: rgb(26, 188, 156); 
+            color: rgb(255, 255, 255);         
+            padding: 10px 20px; 
+            z-index: 10;
+            text-align: center;
+        }
+
+        .sticky-header h3 {
+            margin: 0;
+        }
+
+        .sticky-content {
+            background-color: rgb(250, 250, 250); 
+            padding: 20px;
+            border: 1px solid rgb(221, 221, 221);
+            border-top: none;
+            max-height: 350px; 
+            overflow-y: auto;
+        }
+
+        .sticky-content ul {
+            list-style: none;
+        }
+
+        .sticky-content li {
+            padding: 8px 0;
+            border-bottom: 1px dotted rgb(204, 204, 204); 
+            position: relative; 
+            padding-left: 25px; 
+        }
+        
+     
+        .sticky-content li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: rgb(26, 188, 156);
+            font-weight: bold;
+        }
+
+        .sticky-content a {
+            color: rgb(128, 0, 128); 
+            font-size: 0.9em;
+        }
+
+        .relative-article {
+            position: relative;
+            background-color: rgb(250, 250, 250); 
+            border: 1px solid rgb(221, 221, 221); 
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        
+        .relative-article p {
+            line-height: 1.7;
+        }
+        
+        .fixed-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgb(231, 76, 60); 
+            color: rgb(255, 255, 255);        
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease; 
+            z-index: 30;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        }
+
+        .fixed-button:hover {
+            background-color: rgb(192, 57, 43); 
+            transform: scale(1.05); 
+        }
+
+        footer {
+            background-color: rgb(51, 58, 69); 
+            color: rgb(170, 170, 170);        
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer p::before,
+        footer p::after {
+            content: " --- ";
+        }
+
+        footer a {
+            color: rgb(52, 152, 219); 
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="header-title">Práctica CSS con Position</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="welcome">
+            <h1>Bienvenido a la Práctica CSS</h1>
+            <p>Esta sección sirve como introducción para la práctica avanzada de CSS. Aquí aprenderás a usar la propiedad position para organizar el contenido sin el uso de flexbox o grid.</p>
+        </section>
+
+        <hr>
+
+        <section class="positioned-cards">
+            <div class="card card-1">Tarjeta 1</div>
+            <div class="card card-2">Tarjeta 2</div>
+            <div class="card card-3">Tarjeta 3</div>
+            <h2>Sección con Tarjetas Posicionadas</h2>
+        </section>
+
+        <hr>
+
+        <section class="sticky-section">
+            <div class="sticky-header">
+                <h3>Sección Sticky</h3>
+            </div>
+            <div class="sticky-content">
+                <p>Esta sección tiene un encabezado que se mantiene visible justo debajo del header principal al hacer scroll.</p>
+                <ul>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... <a href="#">Continúa leyendo</a></li>
+                    <li>Suspendisse varius felis vel sapien laoreet, ac facilisis purus interdum. ... <a href="#">Continúa leyendo</a></li>
+                    <li>Curabitur ultricies diam nec orci varius posuere. ... <a href="#">Continúa leyendo</a></li>
+                    <li>Phasellus eget enim eu lectus faucibus vestibulum. ... <a href="#">Continúa leyendo</a></li>
+                    <li>Nulla facilisi. Aenean nec eros. ... <a href="#">Continúa leyendo</a></li>
+                    <li>Etiam fermentum magna eget nisl varius facilisis. ... <a href="#">Continúa leyendo</a></li>
+                    <li>Sed ut perspiciatis unde omnis iste natus error sit voluptatem. ... <a href="#">Continúa leyendo</a></li>
+                    <li>Nam libero tempore, cum soluta nobis est eligendi optio. ... <a href="#">Continúa leyendo</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <article class="relative-article">
+            <h4>Artículo Principal</h4>
+            <p>Este cuadro está en posición relativa.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+            <p>Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis.</p>
+            <p>Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa.</p>
+            <p>Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet.</p>
+            <p>Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit.</p>
+            <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui.</p>
+            <p>Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet.</p>
+            <p>Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus.</p>
+            <p>Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi.</p>
+            <p>Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam.</p>
+            <p>Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante.</p>
+            <p>Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus.</p>
+            <p>Accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci, a hendrerit magna sagittis nec.</p>
+            <p>Phasellus id sapien in libero dignissim placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+            <p>Vivamus ut metus vitae leo feugiat fringilla. Aenean volutpat purus sed consequat tincidunt. Sed sed vehicula elit.</p>
+            <p>Donec at ex in leo viverra vulputate. Pellentesque sit amet nisi id libero euismod pulvinar.</p>
+            <p>Nam eget eros ac quam congue laoreet. Fusce non lacinia velit. Integer pulvinar facilisis lorem, nec fringilla turpis aliquam ac.</p>
+            <p>Vivamus cursus feugiat sapien, sit amet efficitur ipsum mattis eget. Nunc pulvinar augue ac dignissim faucibus.</p>
+            <p>Sed ullamcorper ex eu semper iaculis. Nam tristique justo ut arcu tristique, ut euismod nunc convallis.</p>
+            <p>Etiam porttitor bibendum lectus, in viverra nulla feugiat eget. Suspendisse varius ipsum a libero tincidunt tincidunt.</p>
+            <p>Morbi facilisis lacinia ipsum, vitae volutpat lorem dignissim in. Donec vulputate feugiat leo a condimentum.</p>
+        </article>
+
+    </main>
+
+    <a href="#" class="fixed-button">Hover sobre mi</a>
+
+    <footer>
+        <p>Desarrollado por <a href="#">Desarrollado por Alejandro Castilla</a></p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTER EFECTOS 3D - CHULETA EXAMEN</title>
+    <style>
+        /* --- 1. VARIABLES --- */
+        :root { --primary: #6c5ce7; --secondary: #00b894; --dark: #2d3436; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Verdana', sans-serif; background: #f0f0f0; padding-bottom: 50px; }
+
+        /* --- 2. HERO CON CLIP-PATH (DIAGONAL) --- */
+        .hero-clip {
+            background: linear-gradient(45deg, var(--primary), #a29bfe);
+            color: white;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* TRUCO EXAMEN: Recorte diagonal en la parte inferior */
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        .hero-clip h1 { font-size: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+
+        /* --- 3. FLIP CARDS 3D (TARJETAS GIRATORIAS) --- */
+        .section-title { text-align: center; margin: 40px 0 20px; color: var(--dark); }
+        
+        .cards-container {
+            display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; padding: 20px;
+        }
+
+        /* EL CONTENEDOR DE LA TARJETA */
+        .flip-card {
+            background-color: transparent;
+            width: 300px; height: 200px;
+            perspective: 1000px; /* Vital para el efecto 3D */
+        }
+
+        /* EL INTERIOR QUE GIRA */
+        .flip-card-inner {
+            position: relative; width: 100%; height: 100%;
+            text-align: center;
+            transition: transform 0.8s; /* Duración del giro */
+            transform-style: preserve-3d; /* Vital para que los hijos vivan en 3D */
+        }
+
+        /* AL HACER HOVER, GIRAMOS 180 GRADOS */
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+
+        /* CARAS DE LA TARJETA (FRENTE Y DORSO) */
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden; /* Oculta la cara trasera si no se mira de frente */
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .flip-card-front { background-color: white; color: black; }
+        /* EL DORSO ESTÁ YA GIRADO DE BASE */
+        .flip-card-back {
+            background-color: var(--primary); color: white;
+            transform: rotateY(180deg);
+        }
+
+        /* --- 4. CUSTOM TOGGLE SWITCHES (INTERRUPTORES) --- */
+        .controls-container {
+            max-width: 500px; margin: 0 auto; background: white; padding: 30px;
+            border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .toggle-row {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px;
+        }
+
+        /* ESCONDEMOS EL CHECKBOX REAL */
+        .switch input { display: none; }
+
+        /* DIBUJAMOS EL RIEL (LABEL) */
+        .switch {
+            position: relative; display: inline-block;
+            width: 60px; height: 34px;
+        }
+
+        .slider {
+            position: absolute; cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc; transition: .4s; border-radius: 34px;
+        }
+
+        /* DIBUJAMOS LA BOLITA (BEFORE) */
+        .slider:before {
+            position: absolute; content: "";
+            height: 26px; width: 26px;
+            left: 4px; bottom: 4px;
+            background-color: white; transition: .4s; border-radius: 50%;
+        }
+
+        /* ESTADOS ACTIVOS (CHECKED) */
+        input:checked + .slider { background-color: var(--secondary); }
+        input:checked + .slider:before { transform: translateX(26px); }
+
+        /* --- 5. BOTONES CON GRADIENTE ANIMADO --- */
+        .btn-glow {
+            padding: 15px 40px; border: none; color: white; cursor: pointer;
+            background: linear-gradient(45deg, #ff00cc, #333399, #ff00cc);
+            background-size: 200%; /* Hacemos el fondo más grande */
+            border-radius: 30px; font-weight: bold; text-transform: uppercase;
+            transition: 0.5s;
+            display: block; margin: 30px auto;
+        }
+        .btn-glow:hover {
+            background-position: right; /* Movemos el fondo al pasar el ratón */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="hero-clip">
+        <div>
+            <h1>CSS MASTER 3D</h1>
+            <p>Recortes (clip-path) y Transformaciones</p>
+        </div>
+    </div>
+
+    <h2 class="section-title">Tarjetas Giratorias (Hover me)</h2>
+    <div class="cards-container">
+        
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2 style="font-size:3rem;">🚀</h2>
+                    <h3>Plan Básico</h3>
+                </div>
+                <div class="flip-card-back">
+                    <h3>Detalles</h3>
+                    <p>10GB Espacio</p>
+                    <p>Soporte Email</p>
+                    <button style="padding:5px 10px; margin-top:10px; cursor:pointer;">Comprar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2 style="font-size:3rem;">💎</h2>
+                    <h3>Plan Pro</h3>
+                </div>
+                <div class="flip-card-back">
+                    <h3>Detalles</h3>
+                    <p>Ilimitado</p>
+                    <p>Soporte 24/7</p>
+                    <button style="padding:5px 10px; margin-top:10px; cursor:pointer;">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="section-title">Formulario Interactivo</h2>
+    <div class="controls-container">
+        <div class="toggle-row">
+            <span>Modo Oscuro</span>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-row">
+            <span>Notificaciones</span>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-row">
+            <span>Perfil Público</span>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <button class="btn-glow">Botón Gradiente Animado</button>
+
+</body>
+</html>

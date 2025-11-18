@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3: Grid Areas Magazine</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #111; color: white; }
+
+        .grid-container {
+            display: grid;
+            height: 100vh;
+            gap: 10px;
+            padding: 10px;
+            /* Definimos una rejilla de 4 columnas y 3 filas */
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: 100px 1fr 1fr;
+            
+            /* DIBUJAMOS LA WEB CON TEXTO (Muy útil para exámenes) */
+            grid-template-areas: 
+                "header header header"
+                "menu   hero   news"
+                "menu   hero   extra";
+        }
+
+        /* Asignamos las áreas */
+        .header { grid-area: header; background: #e74c3c; display: flex; align-items: center; justify-content: center; }
+        .menu   { grid-area: menu;   background: #34495e; padding: 20px;}
+        .news   { grid-area: news;   background: #f1c40f; color: black; padding: 20px;}
+        .extra  { grid-area: extra;  background: #9b59b6; padding: 20px;}
+
+        /* EL HERO: La parte difícil */
+        .hero { 
+            grid-area: hero; 
+            position: relative; /* Para poder posicionar cosas dentro */
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        /* Imagen que ocupa todo el grid item */
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Para que no se deforme */
+            filter: brightness(0.6); /* Oscurecer para leer texto */
+        }
+
+        /* Texto FLOTANDO encima de la imagen (Position Absolute) */
+        .hero-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 70%;
+        }
+
+        .etiqueta-nuevo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: red;
+            color: white;
+            padding: 5px 15px;
+            font-weight: bold;
+            transform: rotate(15deg); /* Un toque de estilo CSS */
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        /* Responsive: Cambiamos el dibujo del grid */
+        @media (max-width: 700px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                /* Redibujamos para móvil */
+                grid-template-areas: 
+                    "header"
+                    "hero"
+                    "menu"
+                    "news"
+                    "extra";
+                height: auto; /* Ya no forzamos altura pantalla */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-container">
+        <header class="header">
+            <h1>MAGAZINE GRID</h1>
+        </header>
+
+        <nav class="menu">
+            <h3>Categorías</h3>
+            <ul>
+                <li>Deportes</li>
+                <li>Tecnología</li>
+                <li>Moda</li>
+            </ul>
+        </nav>
+
+        <section class="hero">
+            <img src="https://via.placeholder.com/800x600" alt="Noticia principal">
+            
+            <div class="etiqueta-nuevo">¡NUEVO!</div>
+            <div class="hero-text">
+                <h2>Titular Superpuesto</h2>
+                <p>Este texto está colocado con position: absolute dentro de un grid item.</p>
+            </div>
+        </section>
+
+        <aside class="news">
+            <h3>Última Hora</h3>
+            <p>Noticia rápida 1...</p>
+        </aside>
+
+        <div class="extra">
+            <h3>Publicidad / Extra</h3>
+        </div>
+    </div>
+
+</body>
+</html>

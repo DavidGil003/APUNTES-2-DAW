@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTER CHEAT SHEET - HTML & CSS</title>
+    <style>
+        /* =========================================
+           1. VARIABLES Y RESET (Siempre pon esto)
+           ========================================= */
+        :root {
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --text: #333;
+            --sidebar-w: 250px;
+        }
+
+        * {
+            box-sizing: border-box; /* Vital para que padding no aumente el ancho */
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            color: var(--text);
+            /* Layout General: Barra lateral fija + Contenido */
+            display: flex; 
+        }
+
+        /* =========================================
+           2. SIDEBAR FIJO (POSITION: FIXED)
+           ========================================= */
+        .sidebar {
+            position: fixed; /* Se queda quieto al hacer scroll */
+            top: 0;
+            left: 0;
+            width: var(--sidebar-w);
+            height: 100vh; /* 100% del alto de la ventana */
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            overflow-y: auto; /* Scroll interno si el menú es largo */
+            z-index: 1000;
+        }
+
+        .sidebar h2 { border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; margin-bottom: 20px; }
+        .sidebar a { display: block; color: #bdc3c7; text-decoration: none; padding: 10px; transition: 0.3s; }
+        .sidebar a:hover { color: white; background: rgba(255,255,255,0.1); padding-left: 15px; }
+
+        /* =========================================
+           3. CONTENIDO PRINCIPAL (Margen para el sidebar)
+           ========================================= */
+        .main-content {
+            margin-left: var(--sidebar-w); /* Empujamos para no tapar el sidebar */
+            width: calc(100% - var(--sidebar-w));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================================
+           4. HEADER STICKY (POSITION: STICKY)
+           ========================================= */
+        header {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky; /* Se pega al techo al hacer scroll */
+            top: 0;
+            z-index: 900;
+            display: flex;
+            justify-content: space-between; /* Separa extremos */
+            align-items: center; /* Centra verticalmente */
+        }
+
+        /* Utility Class: Centrado Perfecto (FLEXBOX) */
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* =========================================
+           5. GRID LAYOUT (ÁREAS Y RESPONSIVE)
+           ========================================= */
+        section { padding: 40px; border-bottom: 1px solid #ddd; }
+        
+        .grid-demo {
+            display: grid;
+            gap: 20px;
+            /* Definición de columnas responsive (mínimo 250px) */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            /* Flex columna para empujar botón abajo */
+            display: flex;
+            flex-direction: column; 
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card button { margin-top: auto; } /* Truco: Empuja el botón al final */
+
+        /* =========================================
+           6. POSICIONAMIENTO RELATIVO/ABSOLUTO (OVERLAY)
+           ========================================= */
+        .overlay-container {
+            position: relative; /* El padre debe ser relativo */
+            height: 300px;
+            background-image: url('https://via.placeholder.com/800x400');
+            background-size: cover;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .overlay-text {
+            position: absolute; /* El hijo es absoluto respecto al padre */
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 15px;
+            max-width: 60%;
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* =========================================
+           7. TABLAS COMPLEJAS (COLSPAN/ROWSPAN)
+           ========================================= */
+        .table-wrapper {
+            overflow-x: auto; /* Scroll horizontal en móviles */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Quita espacios entre bordes */
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: var(--dark);
+            color: white;
+            position: sticky; /* Header fijo dentro de la tabla */
+            top: 0; 
+        }
+        tr:nth-child(even) { background-color: #f2f2f2; } /* Filas cebra */
+        tr:hover { background-color: #ddd; }
+
+        /* =========================================
+           8. FORMULARIO AVANZADO
+           ========================================= */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .full-width { grid-column: span 2; } /* Ocupa 2 columnas */
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input:focus { border-color: var(--accent); outline: none; }
+
+        /* =========================================
+           9. TABS SIN JS (RADIO HACK)
+           ========================================= */
+        .tabs { margin-top: 20px; }
+        .tabs input[type="radio"] { display: none; } /* Ocultar radios */
+        
+        .tab-labels { display: flex; gap: 10px; margin-bottom: -1px;}
+        .tab-label {
+            padding: 10px 20px;
+            background: #ddd;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        /* Lógica de selección */
+        #t1:checked ~ .tab-labels label[for="t1"],
+        #t2:checked ~ .tab-labels label[for="t2"] {
+            background: white;
+            border: 1px solid #ccc;
+            border-bottom: 1px solid white;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none; /* Ocultos por defecto */
+            padding: 20px;
+            background: white;
+            border: 1px solid #ccc;
+        }
+
+        /* Mostrar contenido según radio seleccionado */
+        #t1:checked ~ #content1,
+        #t2:checked ~ #content2 { display: block; }
+
+        /* =========================================
+           10. RESPONSIVE MEDIA QUERIES
+           ========================================= */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { 
+                position: relative; 
+                width: 100%; 
+                height: auto; 
+                display: flex; 
+                overflow-x: auto; /* Menú horizontal scrollable */
+            }
+            .sidebar h2 { display: none; }
+            .main-content { margin-left: 0; width: 100%; }
+            .form-grid { grid-template-columns: 1fr; } /* Formulario a 1 columna */
+            .full-width { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>CheatSheet</h2>
+        <nav>
+            <a href="#flex">1. Flexbox & Grid</a>
+            <a href="#position">2. Position & Overlay</a>
+            <a href="#tables">3. Tablas Complejas</a>
+            <a href="#forms">4. Formularios</a>
+            <a href="#tabs">5. Tabs CSS (Hack)</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        
+        <header>
+            <h3>Examen HTML/CSS</h3>
+            <div class="flex-center" style="width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 50%;">
+                A
+            </div>
+        </header>
+
+        <section id="flex">
+            <h2>1. Grid System (Tarjetas)</h2>
+            <p>Uso de <code>grid-template-columns: repeat(auto-fit, minmax(...))</code></p>
+            <br>
+            <div class="grid-demo">
+                <div class="card">
+                    <h4>Tarjeta 1</h4>
+                    <p>Esta tarjeta usa Flexbox vertical para empujar el botón.</p>
+                    <button style="padding: 10px; background: var(--primary); color: white; border: none; margin-top: 10px;">Acción</button>
+                </div>
+                <div class="card">
+                    <h4>Tarjeta 2</h4>
+                    <p>Se adapta automáticamente al tamaño de pantalla.</p>
+                    <button style="padding: 10px; background: var(--primary); color: white; border: none; margin-top: 10px;">Acción</button>
+                </div>
+                <div class="card">
+                    <h4>Tarjeta 3</h4>
+                    <p>Contenido más largo... Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    <button style="padding: 10px; background: var(--primary); color: white; border: none; margin-top: 10px;">Acción</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="position">
+            <h2>2. Position (Relative + Absolute)</h2>
+            <p>Padre: <code>position: relative</code> | Hijo: <code>position: absolute</code></p>
+            <br>
+            <div class="overlay-container">
+                <div class="badge">NUEVO</div>
+                <div class="overlay-text">
+                    <h3>Texto Superpuesto</h3>
+                    <p>Se mantiene abajo a la izquierda gracias a bottom: 20px y left: 20px.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tables">
+            <h2>3. Tablas (Colspan / Rowspan)</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Detalles</th>
+                            <th>Precio</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2" style="background: #ffebee;">Pack Ahorro (Rowspan=2)</td>
+                            <td>Sub-item 1</td>
+                            <td>10€</td>
+                            <td rowspan="2" style="font-weight: bold;">25€</td>
+                        </tr>
+                        <tr>
+                            <td>Sub-item 2</td>
+                            <td>15€</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: right; font-weight: bold;">TOTAL (Colspan=3)</td>
+                            <td style="background: var(--accent); color: white;">25€</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="forms">
+            <h2>4. Formularios con Grid</h2>
+            <form class="form-grid">
+                <div>
+                    <label>Nombre:</label>
+                    <input type="text" placeholder="Tu nombre">
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input type="email" placeholder="tu@email.com">
+                </div>
+                <div class="full-width">
+                    <label>Asunto (Full Width):</label>
+                    <select>
+                        <option>Soporte</option>
+                        <option>Ventas</option>
+                    </select>
+                </div>
+                <div class="full-width">
+                    <label>Mensaje:</label>
+                    <textarea rows="3"></textarea>
+                </div>
+                <button type="submit" class="full-width" style="background: var(--accent); color: white; border: none; padding: 15px;">ENVIAR</button>
+            </form>
+        </section>
+
+        <section id="tabs">
+            <h2>5. Tabs CSS Puro (Sin Javascript)</h2>
+            <div class="tabs">
+                <input type="radio" name="mytabs" id="t1" checked>
+                <input type="radio" name="mytabs" id="t2">
+
+                <div class="tab-labels">
+                    <label for="t1" class="tab-label">Pestaña 1</label>
+                    <label for="t2" class="tab-label">Pestaña 2</label>
+                </div>
+
+                <div id="content1" class="tab-content">
+                    <p>Contenido de la <b>Pestaña 1</b>. Se muestra porque el radio #t1 está checked.</p>
+                </div>
+                <div id="content2" class="tab-content">
+                    <p>Contenido de la <b>Pestaña 2</b>. Has cambiado de radio button.</p>
+                    <div style="width: 50px; height: 50px; background: red; border-radius: 50%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="background: #333; color: white; padding: 20px; text-align: center; margin-top: auto;">
+            Footer con <code>margin-top: auto</code> (Sticky Footer technique)
+        </footer>
+
+    </main>
+</body>
+</html>

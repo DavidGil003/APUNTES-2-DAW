@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTER E-COMMERCE - CHULETA EXAMEN</title>
+    <style>
+        /* --- 1. RESET & BASE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f8f9fa; color: #333; padding: 20px; }
+        img { max-width: 100%; display: block; }
+
+        /* --- 2. LAYOUT PRINCIPAL (GRID) --- */
+        .product-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; /* Imágenes (grande) | Info (pequeña) */
+            gap: 40px;
+        }
+
+        /* --- 3. SECCIÓN IMÁGENES (GALERÍA) --- */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .main-image {
+            position: relative; /* Para poner la etiqueta de oferta */
+            border-radius: 8px; overflow: hidden; border: 1px solid #eee;
+        }
+        .badge-offer {
+            position: absolute; top: 15px; left: 15px;
+            background: #ff4757; color: white; padding: 5px 10px;
+            font-weight: bold; border-radius: 4px; text-transform: uppercase; font-size: 0.8rem;
+        }
+        
+        .thumbnails { display: flex; gap: 10px; }
+        .thumb {
+            width: 80px; height: 80px; border: 1px solid #ddd; border-radius: 6px;
+            cursor: pointer; opacity: 0.6; transition: 0.3s;
+        }
+        .thumb:hover { opacity: 1; border-color: #333; }
+
+        /* --- 4. SECCIÓN INFORMACIÓN (STICKY) --- */
+        .product-info {
+            /* TRUCO EXAMEN: Que la info se quede fija al hacer scroll si la galería es muy larga */
+            position: sticky; 
+            top: 20px; 
+            height: fit-content;
+        }
+
+        .brand { color: #888; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+        h1 { font-size: 2.2rem; margin: 10px 0; line-height: 1.1; }
+        
+        /* PRECIO */
+        .price-box { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .current-price { font-size: 2rem; font-weight: bold; color: #2f3542; }
+        .old-price { text-decoration: line-through; color: #a4b0be; font-size: 1.2rem; }
+
+        /* SELECTOR DE COLORES (HACK RADIO BUTTONS) */
+        .color-selector { margin-bottom: 20px; }
+        .color-options { display: flex; gap: 10px; margin-top: 10px; }
+        
+        /* Ocultamos el radio button feo por defecto */
+        .color-options input[type="radio"] { display: none; }
+
+        /* Damos estilo al label para que parezca un botón de color */
+        .color-circle {
+            width: 35px; height: 35px; border-radius: 50%; cursor: pointer;
+            border: 2px solid #eee; position: relative;
+        }
+        
+        /* Colores específicos */
+        .c-black { background: #2f3542; }
+        .c-blue { background: #3742fa; }
+        .c-red { background: #ff4757; }
+
+        /* Cuando el input está checked, cambiamos el borde del label hermano */
+        input:checked + .color-circle {
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px #333; /* Doble borde para indicar selección */
+            transform: scale(1.1);
+        }
+
+        /* BOTONES DE ACCIÓN */
+        .actions { display: grid; grid-template-columns: 1fr 2fr; gap: 15px; margin-top: 30px; }
+        
+        input[type="number"] { padding: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
+        
+        .btn-buy {
+            background: #2ed573; color: white; border: none; font-weight: bold;
+            font-size: 1.1rem; border-radius: 5px; cursor: pointer; transition: 0.3s;
+        }
+        .btn-buy:hover { background: #26af61; }
+
+        /* TABLA DE CARACTERÍSTICAS SIMPLE */
+        .specs { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+        .specs table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .specs th, .specs td { text-align: left; padding: 8px 0; border-bottom: 1px solid #f1f1f1; font-size: 0.9rem; }
+        .specs th { width: 40%; color: #888; font-weight: normal; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .product-container { grid-template-columns: 1fr; } /* Una columna */
+            .product-info { position: static; } /* Quitamos sticky en móvil */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="product-container">
+        
+        <div class="gallery">
+            <div class="main-image">
+                <span class="badge-offer">-20%</span>
+                <img src="https://via.placeholder.com/600x600/333/fff?text=Producto+Principal" alt="Producto">
+            </div>
+            <div class="thumbnails">
+                <img src="https://via.placeholder.com/100" class="thumb" alt="Vista 1">
+                <img src="https://via.placeholder.com/100" class="thumb" alt="Vista 2">
+                <img src="https://via.placeholder.com/100" class="thumb" alt="Vista 3">
+            </div>
+        </div>
+
+        <div class="product-info">
+            <span class="brand">Sony Electronics</span>
+            <h1>Auriculares Noise Cancelling WH-1000XM5</h1>
+            
+            <div class="price-box">
+                <span class="current-price">349€</span>
+                <span class="old-price">450€</span>
+            </div>
+
+            <p>Disfruta del silencio con la mejor cancelación de ruido del mercado. 30 horas de batería y carga rápida.</p>
+
+            <div class="color-selector">
+                <p><strong>Color:</strong> Selecciona uno</p>
+                <div class="color-options">
+                    <label>
+                        <input type="radio" name="color" checked>
+                        <div class="color-circle c-black"></div>
+                    </label>
+                    <label>
+                        <input type="radio" name="color">
+                        <div class="color-circle c-blue"></div>
+                    </label>
+                    <label>
+                        <input type="radio" name="color">
+                        <div class="color-circle c-red"></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="actions">
+                <input type="number" value="1" min="1" max="5">
+                <button class="btn-buy">AÑADIR AL CARRITO</button>
+            </div>
+
+            <div class="specs">
+                <h4>Especificaciones</h4>
+                <table>
+                    <tr><th>Peso</th><td>250g</td></tr>
+                    <tr><th>Batería</th><td>30 Horas</td></tr>
+                    <tr><th>Bluetooth</th><td>5.2</td></tr>
+                    <tr><th>Carga</th><td>USB-C</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

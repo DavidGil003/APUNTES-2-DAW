@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabs CSS Puro</title>
+    <style>
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #2c3e50; padding: 50px; color: #333; display: flex; justify-content: center; }
+
+        .tabs-container {
+            background: white;
+            width: 100%;
+            max-width: 800px;
+            min-height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative; /* Necesario para el contenido absoluto */
+            overflow: hidden;
+        }
+
+        /* 1. OCULTAMOS LOS INPUTS (La magia invisible) */
+        input[name="tab"] { display: none; }
+
+        /* 2. ESTILO DE LAS ETIQUETAS (Funcionan como botones) */
+        .tab-label {
+            display: inline-block;
+            padding: 20px 30px;
+            font-weight: bold;
+            color: #7f8c8d;
+            cursor: pointer;
+            transition: 0.3s;
+            border-bottom: 4px solid transparent;
+        }
+
+        .tab-label:hover { background: #ecf0f1; }
+
+        /* 3. LOGICA DEL SELECTOR:
+           Si el input con ID tab1 está checked, busca a su hermano label con for="tab1" */
+        #tab1:checked ~ nav label[for="tab1"],
+        #tab2:checked ~ nav label[for="tab2"],
+        #tab3:checked ~ nav label[for="tab3"] {
+            color: #e74c3c;
+            border-bottom-color: #e74c3c;
+        }
+
+        /* 4. EL CONTENIDO */
+        .content-section {
+            position: absolute; /* Apilamos todos los div uno encima de otro */
+            top: 60px; /* Dejamos espacio para los botones de arriba */
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            opacity: 0; /* Invisibles por defecto */
+            visibility: hidden; /* Para que no se puedan clicar cuando no se ven */
+            transform: translateY(20px); /* Para animar entrada */
+            transition: all 0.5s ease;
+            background: white;
+        }
+
+        /* 5. LA MAGIA FINAL: Mostrar el contenido según el input marcado */
+        #tab1:checked ~ .content-section#content1,
+        #tab2:checked ~ .content-section#content2,
+        #tab3:checked ~ .content-section#content3 {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            z-index: 10;
+        }
+
+        /* Estilos extra para el contenido */
+        h2 { margin-bottom: 20px; color: #2c3e50; }
+        p { line-height: 1.6; margin-bottom: 15px; }
+        
+        /* Grid dentro de un tab (¡Mezcla de conceptos!) */
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .box { height: 100px; background: #ddd; border-radius: 4px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="tabs-container">
+        <input type="radio" id="tab1" name="tab" checked>
+        <input type="radio" id="tab2" name="tab">
+        <input type="radio" id="tab3" name="tab">
+
+        <nav style="background: #f9f9f9; border-bottom: 1px solid #ddd;">
+            <label for="tab1" class="tab-label">👤 Perfil</label>
+            <label for="tab2" class="tab-label">⚙️ Configuración</label>
+            <label for="tab3" class="tab-label">📷 Galería</label>
+        </nav>
+
+        <section id="content1" class="content-section">
+            <h2>Mi Perfil de Usuario</h2>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <div style="width: 100px; height: 100px; background: #e74c3c; border-radius: 50%;"></div>
+                <div>
+                    <h3>Alejandro Castilla</h3>
+                    <p>Desarrollador Web Full Stack</p>
+                    <button style="padding: 8px 15px; background: #2c3e50; color: white; border: none;">Editar</button>
+                </div>
+            </div>
+            <hr style="margin: 20px 0;">
+            <p>Este contenido aparece gracias al selector general de hermanos (~).</p>
+        </section>
+
+        <section id="content2" class="content-section">
+            <h2>Configuración de la cuenta</h2>
+            <form style="display: grid; gap: 15px; max-width: 400px;">
+                <label>
+                    Cambiar Email
+                    <input type="email" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc;">
+                </label>
+                <label>
+                    <input type="checkbox"> Recibir notificaciones
+                </label>
+                <label>
+                    <input type="checkbox" checked> Modo oscuro
+                </label>
+            </form>
+        </section>
+
+        <section id="content3" class="content-section">
+            <h2>Galería de Proyectos</h2>
+            <div class="gallery-grid">
+                <div class="box" style="background: tomato;"></div>
+                <div class="box" style="background: gold;"></div>
+                <div class="box" style="background: steelblue;"></div>
+                <div class="box" style="background: limegreen;"></div>
+                <div class="box" style="background: orange;"></div>
+                <div class="box" style="background: slateblue;"></div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
