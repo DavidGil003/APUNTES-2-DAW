@@ -1,0 +1,61 @@
+body {
+    background-color: #A9D0F5;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: 50px auto;
+}
+
+h2 {
+    text-align: center;
+    color: #000000;
+}
+
+fieldset {
+    border: 1px solid #777;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+legend {
+    color: #000000;
+    font-weight: bold;
+}
+
+label {
+    color: #0000FF;
+    font-weight: bold;
+    display: inline-block;
+    width: 80px;
+}
+
+input[type="text"] {
+    width: 200px;
+    margin-bottom: 5px;
+}
+
+.listado-paises {
+    min-height: 50px;
+    padding: 5px;
+}
+
+.pais-item {
+    color: #0000FF;
+    display: inline-block;
+    width: 150px;
+}
+
+.capital-item {
+    color: #000000;
+    display: inline-block;
+}
+
+#vaciar-btn {
+    background-color: #FF6A6A;
+    color: white;
+    border: 1px solid red;
+    padding: 5px 10px;
+    cursor: pointer;
+}
