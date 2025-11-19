@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Notas - Alumno</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Calculadora de Notas</h1>
+        <p class="subtitle">Introduce los datos del alumno</p>
+        
+        <form id="notasForm" action="procesar.php" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre del Alumno <span class="required">*</span></label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez">
+            </div>
+
+            <div class="form-group">
+                <label for="fechaNacimiento">Fecha de Nacimiento <span class="required">*</span></label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+            </div>
+
+            <div class="form-group">
+                <label for="notas">Notas <span class="required">*</span></label>
+                <input type="text" id="notas" name="notas" required placeholder="Ej: 7.5|8|6.25" pattern="^(10(\.0{1,2})?|[0-9](\.[0-9]{1,2})?)(\|(10(\.0{1,2})?|[0-9](\.[0-9]{1,2})?))*$" title="Introduce solo números entre 0 y 10, separados por |">
+                <p class="help-text">Separa las notas con el símbolo | (barra vertical). Ninguna nota puede ser mayor que 10.</p>
+            </div>
+
+            <div class="form-group">
+                <label for="comportamiento">Comportamiento <span class="required">*</span></label>
+                <select id="comportamiento" name="comportamiento" required>
+                    <option value="">-- Selecciona una opción --</option>
+                    <option value="muy_malo">Muy malo</option>
+                    <option value="malo">Malo</option>
+                    <option value="normal">Normal</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="excelente">Excelente</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comentarios">Comentarios (opcional)</label>
+                <textarea id="comentarios" name="comentarios" placeholder="Escribe aquí cualquier observación adicional..."></textarea>
+            </div>
+
+            <button type="submit">Calcular Nota Final</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ToolShare - Simulador alquiler</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body{font-family:Arial, Helvetica, sans-serif;margin:20px;background:#f7fff7;color:#1b2b18}
+  .container{max-width:980px;margin:0 auto;background:#fff;padding:18px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.06)}
+  h1{color:#1a6f2d}
+  label{display:block;margin-bottom:6px;font-weight:600}
+  select,input{padding:8px;border-radius:6px;border:1px solid #dfe8de}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+  .cart{margin-top:14px}
+  table{width:100%;border-collapse:collapse;margin-top:12px}
+  th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}
+  .summary{margin-top:12px;padding:10px;background:#f0fff4;border-radius:6px}
+  button{background:#1a6f2d;color:#fff;padding:9px 12px;border:none;border-radius:6px;cursor:pointer}
+  button.ghost{background:#777}
+  .small{font-size:0.9em;color:#555}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>ToolShare — Simulador de alquiler</h1>
+  <p class="small">Selecciona herramientas de ejemplo, indica cantidad y días de alquiler. Al pulsar <strong>Confirmar alquiler</strong> se enviará el campo oculto <code>productos</code> por POST en el formato: <code>SKU:Nombre:PrecioDia:Cantidad:Dias:Tipo[:Extra]</code>. El servidor (alumno) será responsable de calcular recargos por tipo, descuentos por días largos, etc.</p>
+
+  <form id="formTool" action="controlador.php" method="post">
+    <div class="row">
+      <div style="flex:1;min-width:240px">
+        <label>Herramientas ejemplo</label>
+        <select id="toolSelect" style="width:100%"></select>
+      </div>
+
+      <div style="width:110px">
+        <label>Cantidad</label>
+        <input type="number" id="toolQty" min="1" value="1">
+      </div>
+
+      <div style="width:110px">
+        <label>Días</label>
+        <input type="number" id="toolDays" min="1" value="3">
+      </div>
+
+      <div style="width:140px">
+        <label>Extra (potencia o nota)</label>
+        <input type="text" id="toolExtra" placeholder="ej. 1200W">
+      </div>
+
+      <div>
+        <button type="button" id="addTool">Añadir</button>
+      </div>
+    </div>
+
+    <div class="cart" id="cartArea">
+      <p class="small">El carrito de alquiler está vacío.</p>
+    </div>
+
+    <div class="summary" id="summary" style="display:none">
+      <p><strong>Estimación subtotal (sin aplicar recargos/IVA):</strong> €<span id="estSubtotal">0.00</span></p>
+      <p class="small">Reglas como recargos por tipo eléctrico o descuentos por alquiler >7 días se deberán aplicar en el controlador del alumno.</p>
+    </div>
+
+    <!-- hidden fields -->
+    <input type="hidden" name="productos" id="productosHidden">
+    <input type="hidden" name="cliente" value="Cliente ToolShare Demo">
+
+    <div style="margin-top:12px">
+      <button type="submit">Confirmar alquiler</button>
+      <button type="button" class="ghost" id="clearTool">Vaciar carrito</button>
+    </div>
+  </form>
+</div>
+
+<script>
+/* Datos de ejemplo ToolShare */
+const ejemploTools = [
+  // sku, nombre, precioDia, tipo (M=manual, E=eléctrico), extra default
+  {sku:'DRL-100', nombre:'Taladro percutor', precio:8.50, tipo:'E', extra:'800W'},
+  {sku:'SAW-450', nombre:'Sierra circular', precio:12.00, tipo:'E', extra:'1500W'},
+  {sku:'HAM-20', nombre:'Martillo demoledor', precio:20.00, tipo:'E', extra:'2000W'},
+  {sku:'WREN-01', nombre:'Juego llaves inglés', precio:3.00, tipo:'M', extra:'Set 12pz'},
+  {sku:'GEN-500', nombre:'Generador 5kW', precio:45.00, tipo:'E', extra:'Gasolina 4T'}
+];
+
+const sel = document.getElementById('toolSelect');
+ejemploTools.forEach((t, i) => {
+  const o = document.createElement('option');
+  o.value = i;
+  o.textContent = `${t.sku} — ${t.nombre} — €${t.precio.toFixed(2)}/día (${t.tipo==='E'?'Eléctrico':'Manual'})`;
+  sel.appendChild(o);
+});
+
+let carrito = [];
+
+function renderToolCart(){
+  const area = document.getElementById('cartArea');
+  area.innerHTML = '';
+  if(carrito.length === 0){
+    area.innerHTML = '<p class="small">El carrito de alquiler está vacío.</p>';
+    document.getElementById('summary').style.display = 'none';
+    document.getElementById('productosHidden').value = '';
+    return;
+  }
+  const table = document.createElement('table');
+  table.innerHTML = '<thead><tr><th>Herramienta</th><th>Cant.</th><th>Días</th><th>Precio/día</th><th>Total</th><th></th></tr></thead>';
+  const tbody = document.createElement('tbody');
+  let subtotal = 0;
+  carrito.forEach((it, idx) => {
+    const total = it.precio * it.cantidad * it.dias;
+    subtotal += total;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${it.sku} — ${escapeHTML(it.nombre)}</td>
+      <td>${it.cantidad}</td>
+      <td>${it.dias}</td>
+      <td>€${it.precio.toFixed(2)}</td>
+      <td>€${total.toFixed(2)}</td>
+      <td><button data-i="${idx}" class="remTool">Quitar</button></td>`;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  area.appendChild(table);
+  document.getElementById('estSubtotal').textContent = subtotal.toFixed(2);
+  document.getElementById('summary').style.display = 'block';
+
+  // preparar campo hidden con formato: SKU:Nombre:PrecioDia:Cantidad:Dias:Tipo:Extra|...
+  const parts = carrito.map(it => `${it.sku}:${it.nombre}:${it.precio}:${it.cantidad}:${it.dias}:${it.tipo}:${it.extra}`);
+  document.getElementById('productosHidden').value = parts.join('|');
+
+  Array.from(document.getElementsByClassName('remTool')).forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      carrito.splice(parseInt(e.target.dataset.i,10),1);
+      renderToolCart();
+    });
+  });
+}
+
+document.getElementById('addTool').addEventListener('click', () => {
+  const idx = parseInt(sel.value,10);
+  const tool = ejemploTools[idx];
+  const cantidad = Math.max(1, parseInt(document.getElementById('toolQty').value,10) || 1);
+  const dias = Math.max(1, parseInt(document.getElementById('toolDays').value,10) || 1);
+  let extra = document.getElementById('toolExtra').value.trim();
+  if(!extra) extra = tool.extra;
+  carrito.push({
+    sku: tool.sku,
+    nombre: tool.nombre,
+    precio: tool.precio,
+    cantidad: cantidad,
+    dias: dias,
+    tipo: tool.tipo,
+    extra: extra
+  });
+  renderToolCart();
+});
+
+document.getElementById('clearTool').addEventListener('click', () => {
+  carrito = [];
+  renderToolCart();
+});
+
+function escapeHTML(s){ return String(s).replace(/[&<>"']/g, (m)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+</script>
+</body>
+</html>
