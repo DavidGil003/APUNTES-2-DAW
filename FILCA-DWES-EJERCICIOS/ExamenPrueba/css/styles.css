@@ -1,0 +1,58 @@
+body {
+   background-color: #8fc2fa;
+   font-family: Arial, sans-serif;
+}
+
+.lista-paises {
+   display: flex;
+   list-style: none;
+   margin: 0;
+   padding: 0;
+}
+
+.lista-paises li {
+   padding-right: 20px;
+   font-weight: bold;
+}
+
+.mensaje {
+   background-color: #d4edda;
+   color: #155724;
+   padding: 10px;
+   border: 1px solid #c3e6cb;
+   border-radius: 5px;
+   margin: 10px 0;
+}
+
+fieldset {
+   margin: 10px 0;
+   padding: 15px;
+   border: 2px solid #007bff;
+   border-radius: 5px;
+}
+
+legend {
+   font-weight: bold;
+   color: #007bff;
+}
+
+input[type="text"] {
+   padding: 5px;
+   margin: 5px;
+   border: 1px solid #ccc;
+   border-radius: 3px;
+}
+
+button {
+   padding: 8px 15px;
+   margin: 5px;
+   background-color: #007bff;
+   color: white;
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
+}
+
+button:hover {
+   background-color: #0056b3;
+}

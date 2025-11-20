@@ -1,0 +1,622 @@
+/* -------------------- */
+/* Variables y Reset Básico */
+/* -------------------- */
+
+:root {
+    /* Paleta de colores moderna (Gradientes vibrantes) */
+    --color-primary: #667eea;
+    --color-primary-dark: #5a67d8;
+    --color-secondary: #764ba2;
+    --color-accent: #f093fb;
+    --color-background: #f7fafc;
+    --color-card-bg: #ffffff;
+    --color-success: #48bb78;
+    --color-success-light: #68d391;
+    --color-warning: #ed8936;
+    --color-warning-light: #f6ad55;
+    --color-error: #f56565;
+    --color-text-dark: #2d3748;
+    --color-text-light: #ffffff;
+    --color-text-muted: #718096;
+    --color-border: #e2e8f0;
+
+    /* Gradientes */
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secundary: linear-gradient(135deg, #ea6666 0%, #a24b7b 100%);
+    --gradient-success: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    --gradient-card: linear-gradient(145deg, #ffffff 0%, #f7fafc 100%);
+    
+    /* Sombras modernas */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-colored: 0 10px 40px -10px rgba(102, 126, 234, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Efecto de fondo animado */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* -------------------- */
+/* Diseño Principal y Contenedor */
+/* -------------------- */
+
+.container {
+    width: 92%;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    color: var(--color-text-dark);
+    padding: 3rem 2rem;
+    text-align: center;
+
+    /* MODIFICACIONES PARA LA ANCHURA */
+    width: 92%; /* Mismo ancho porcentual que .container */
+    margin: auto;
+
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow-xl);
+    border-radius: 0px 0px 24px 24px;
+    transform: translateY(0);
+    animation: slideDown 0.6s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header h1 {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-light);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 0.5rem;
+}
+
+h2::before {
+    content: '';
+    width: 4px;
+    height: 28px;
+    background: var(--gradient-secundary);
+    border-radius: 2px;
+}
+
+h2:first-of-type {
+    margin-top: 0;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    margin: 2.5rem 0;
+}
+
+small {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* -------------------- */
+/* Formulario de Nueva Tarea */
+/* -------------------- */
+
+.task-form {
+    background: var(--color-card-bg);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-xl);
+    margin-bottom: 3rem;
+    border: 1px solid var(--color-border);
+    animation: fadeIn 0.6s ease-out 0.2s both;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-form:hover {
+    box-shadow: var(--shadow-2xl);
+}
+
+.form-group {
+    margin-bottom: 1.75rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    font-size: 0.95rem;
+}
+
+.task-form input[type="text"],
+.task-form textarea,
+.task-form input[type="file"] {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: var(--color-background);
+}
+
+.task-form input:focus,
+.task-form textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    outline: none;
+    background: white;
+}
+
+.task-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.task-form input[type="file"] {
+    padding: 0.75rem;
+    cursor: pointer;
+}
+
+.task-form input[type="file"]::file-selector-button {
+    padding: 0.5rem 1rem;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.task-form input[type="file"]::file-selector-button:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+    box-shadow: var(--shadow-colored);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px -10px rgba(102, 126, 234, 0.5);
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* -------------------- */
+/* Listado de Tareas (Tarjetas) */
+/* -------------------- */
+
+.task-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+.task-item {
+    background: var(--color-card-bg);
+    padding: 1.75rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-out both;
+}
+
+.task-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+}
+
+.task-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-2xl);
+    border-color: var(--color-primary);
+}
+
+.task-item:hover::before {
+    width: 8px;
+}
+
+/* Tarea Completada */
+.task-item.completed {
+    background: linear-gradient(145deg, #f0fff4 0%, #ffffff 100%);
+    border-color: var(--color-success);
+}
+
+.task-item.completed::before {
+    background: var(--gradient-success);
+}
+
+.task-item.completed h3 {
+    text-decoration: line-through;
+    color: var(--color-text-muted);
+}
+
+/* Contenido de la Tarea */
+.task-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.35rem;
+    font-weight: 700;
+    word-wrap: break-word;
+    line-height: 1.3;
+}
+
+.task-item.completed .task-content h3 {
+    background: var(--color-text-muted);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.task-description {
+    margin: 0.75rem 0;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+}
+
+.task-attachment {
+    margin: 0.75rem 0;
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(102, 126, 234, 0.1);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+}
+
+/* Sección de Acciones */
+.task-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+    gap: 0.75rem;
+}
+
+/* Estilo para el estado (badge) */
+.status-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: var(--gradient-primary);
+    color: var(--color-text-light);
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.task-item.completed .status-badge {
+    background: var(--gradient-success);
+}
+
+/* Botones de acción en la tarjeta */
+.btn-complete,
+.btn-undo {
+    font-weight: 700;
+    padding: 0.625rem 1.25rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-complete::before,
+.btn-undo::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-complete:hover::before,
+.btn-undo:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Botón de Completar */
+.btn-complete {
+    background: var(--gradient-success);
+}
+
+.btn-complete:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -5px rgba(72, 187, 120, 0.4);
+}
+
+/* Botón de Desmarcar */
+.btn-undo {
+    background: linear-gradient(135deg, var(--color-warning) 0%, var(--color-warning-light) 100%);
+}
+
+.btn-undo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -5px rgba(237, 137, 54, 0.4);
+}
+
+.btn-complete:active,
+.btn-undo:active {
+    transform: translateY(0);
+}
+
+/* -------------------- */
+/* Pie de Página (Footer) */
+/* -------------------- */
+
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    margin-top: auto;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 500;
+}
+
+/* Estado vacío mejorado */
+.container > p {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 16px;
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    box-shadow: var(--shadow-md);
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* -------------------- */
+/* Media Queries para Responsividad */
+/* -------------------- */
+
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem auto;
+        width: 95%;
+    }
+
+    header {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+        border-radius: 20px;
+    }
+
+    header h1 {
+        font-size: 2.25rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .task-form {
+        padding: 1.75rem;
+        border-radius: 16px;
+    }
+
+    .task-list {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .task-item {
+        padding: 1.5rem;
+    }
+
+    .task-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .task-actions form {
+        width: 100%;
+    }
+
+    .btn-complete,
+    .btn-undo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .status-badge {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.875rem;
+    }
+
+    header p {
+        font-size: 0.95rem;
+    }
+
+    .task-form {
+        padding: 1.5rem;
+    }
+
+    .btn-primary {
+        padding: 0.875rem 1.5rem;
+    }
+}
+
+/* Animaciones adicionales */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Efecto de carga para tareas */
+.task-item:nth-child(1) { animation-delay: 0.1s; }
+.task-item:nth-child(2) { animation-delay: 0.2s; }
+.task-item:nth-child(3) { animation-delay: 0.3s; }
+.task-item:nth-child(4) { animation-delay: 0.4s; }
+.task-item:nth-child(5) { animation-delay: 0.5s; }
+.task-item:nth-child(6) { animation-delay: 0.6s; }

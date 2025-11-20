@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net" agent="Gemini" version="1.0.0">
+  <diagram name="PHP-ToolShare-Diagram" id="GPNb7k4n-Qf6bsFY_Oe7">
+    <mxGraphModel dx="1426" dy="785" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="herramienta_class" value="&lt;i&gt;Herramienta&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;" parent="1" vertex="1">
+          <mxGeometry x="388" y="320" width="400" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="herramienta_props_start" value="- SKU: string&lt;br&gt;- nombre: string&lt;br&gt;- tipo: string&lt;br&gt;- precioDia: float&lt;br&gt;- descripcion: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="herramienta_class" vertex="1">
+          <mxGeometry y="30" width="400" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="herramienta_separator" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="herramienta_class" vertex="1">
+          <mxGeometry y="120" width="400" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="herramienta_methods" value="+ __construct(SKU, nombre, tipo, precioDia, descripcion)&lt;br&gt;+ &lt;i&gt;calcularPrecio(dias: int, precioDia: float): float&lt;/i&gt;&lt;br&gt;+ getSKU(): string&lt;br&gt;+ setSKU(value: string): void&lt;br&gt;+ getNombre(): string&lt;br&gt;+ setNombre(value: string): void&lt;br&gt;+ getTipo(): string&lt;br&gt;+ setTipo(value: string): void&lt;br&gt;+ getPrecioDia(): float&lt;br&gt;+ setPrecioDia(value: float): void&lt;br&gt;+ getDescripcion(): string&lt;br&gt;+ setDescripcion(value: string): void&lt;br&gt;+ __toString(): string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="herramienta_class" vertex="1">
+          <mxGeometry y="128" width="400" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="herramienta_manual_class" value="HerramientaManual" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;" parent="1" vertex="1">
+          <mxGeometry x="140" y="800" width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="herramienta_manual_separator" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="herramienta_manual_class" vertex="1">
+          <mxGeometry y="30" width="300" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="herramienta_manual_methods" value="+ calcularPrecio(dias: int, precioDia: float): float" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="herramienta_manual_class" vertex="1">
+          <mxGeometry y="38" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="herramienta_electrica_class" value="HerramientaElectrica" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;" parent="1" vertex="1">
+          <mxGeometry x="740" y="800" width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="herramienta_electrica_separator" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="herramienta_electrica_class" vertex="1">
+          <mxGeometry y="30" width="300" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="herramienta_electrica_methods" value="+ calcularPrecio(dias: int, precioDia: float): float" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="herramienta_electrica_class" vertex="1">
+          <mxGeometry y="38" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="alquiler_class" value="Alquiler" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;" parent="1" vertex="1">
+          <mxGeometry x="388" y="20" width="400" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="alquiler_props" value="- herramientas: array" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="alquiler_class" vertex="1">
+          <mxGeometry y="30" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="alquiler_separator" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="alquiler_class" vertex="1">
+          <mxGeometry y="60" width="400" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="alquiler_methods" value="+ __construct(herramientas: array)&lt;br&gt;- separarArray(herramientas: array): array&lt;br&gt;+ calcularTotal(): array&lt;br&gt;+ getHerramientas(): array&lt;br&gt;+ setHerramientas(value: array): void&lt;br&gt;+ __toString(): string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="alquiler_class" vertex="1">
+          <mxGeometry y="68" width="400" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="inheritance_manual" style="endArrow=block;endFill=0;html=1;rounded=0;exitX=0.5;exitY=0;entryX=0.25;entryY=1;" edge="1" parent="1" source="herramienta_manual_class" target="herramienta_class">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="290" y="750" as="sourcePoint" />
+            <mxPoint x="490" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="inheritance_electrica" style="endArrow=block;endFill=0;html=1;rounded=0;exitX=0.5;exitY=0;entryX=0.75;entryY=1;" edge="1" parent="1" source="herramienta_electrica_class" target="herramienta_class">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="890" y="750" as="sourcePoint" />
+            <mxPoint x="690" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dependency_manual" value="&amp;lt;&amp;lt;uses&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0.1;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="alquiler_class" target="herramienta_manual_class">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="438" y="240" as="sourcePoint" />
+            <mxPoint x="290" y="900" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="290" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dependency_electrica" value="&amp;lt;&amp;lt;uses&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0.9;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="alquiler_class" target="herramienta_electrica_class">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="748" y="240" as="sourcePoint" />
+            <mxPoint x="890" y="900" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="890" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

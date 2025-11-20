@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Estudiante</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 40px;
+        }
+
+        .optional {
+            color: #999;
+            font-weight: 400;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .helper-text {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Registro de Estudiante</h1>
+        <p class="subtitle">Complete el formulario con los datos del estudiante</p>
+        
+        <form id="studentForm" action="Procesar.php" method="post">
+            <div class="form-group">
+                <label for="nombre">
+                    <span class="icon">👤</span> Nombre Completo
+                </label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez García">
+            </div>
+
+            <div class="form-group">
+                <label for="fechaNacimiento">
+                    <span class="icon">📅</span> Fecha de Nacimiento
+                </label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+            </div>
+
+            <div class="form-group">
+                <label for="notas">
+                    <span class="icon">📝</span> Notas
+                </label>
+                <input type="text" id="notas" name="notas" required placeholder="Ej: 7.5|8|6.25">
+                <p class="helper-text">Separe las notas con el símbolo | (barra vertical)</p>
+            </div>
+
+            <div class="form-group">
+                <label for="comportamiento">
+                    <span class="icon">⭐</span> Comportamiento
+                </label>
+                <select id="comportamiento" name="comportamiento" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="Muy malo">Muy malo</option>
+                    <option value="Malo">Malo</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Bueno">Bueno</option>
+                    <option value="Excelente">Excelente</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comentarios">
+                    <span class="icon">💬</span> Comentarios
+                    <span class="optional">(opcional)</span>
+                </label>
+                <textarea id="comentarios" name="comentarios" placeholder="Escriba aquí observaciones adicionales sobre el estudiante..."></textarea>
+            </div>
+
+            <button type="submit">
+                ✓ Guardar Información
+            </button>
+        </form>
+    </div>
+</body>
+</html>
