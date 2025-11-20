@@ -37,7 +37,7 @@ class LibroModel
         return $consulta->execute([
             $data['titulo'],
             $data['autor'],
-            $data['portada_ruta']
+            $data['portada']
         ]);
     }
 

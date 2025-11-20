@@ -43,7 +43,7 @@ $botonTexto = $isEditando ? "✅ Guardar Cambios" : "✅ Guardar Libro";
         
         <?php if ($isEditando && !empty($libro['portada'])): ?>
             <div style="margin-bottom: 15px;">
-                <img src="<?= strpos($libro['portada'], 'http') === 0 ? htmlspecialchars($libro['portada']) : htmlspecialchars($libro['portada']) ?>" alt="Portada actual" style="max-width: 150px; max-height: 200px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                <img src="<?= htmlspecialchars(LibroController::obtenerUrlImagen($libro['portada'])) ?>" alt="Portada actual" style="max-width: 150px; max-height: 200px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
                 <p style="margin-top: 10px; font-size: 0.9rem; color: #94a3b8;">Imagen actual</p>
             </div>
         <?php endif; ?>

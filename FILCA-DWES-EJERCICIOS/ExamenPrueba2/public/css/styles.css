@@ -1,0 +1,583 @@
+:root {
+    /* --- COLORES DE MARCA (No cambian) --- */
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #ec4899;
+    --warning: #fbbf24;
+    --danger: #ef4444;
+    --radius: 12px;
+
+    /* --- VARIABLES DINÁMICAS (Valores por defecto: DARK MODE) --- */
+    --bg-body: #0f172a;       /* Fondo principal oscuro */
+    --bg-card: #1e293b;       /* Fondo tarjetas oscuro */
+    --text-main: #f8fafc;     /* Texto principal claro */
+    --text-muted: #94a3b8;    /* Texto secundario gris */
+    --border: #334155;        /* Bordes oscuros */
+    
+    /* Sombras oscuras */
+    --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    
+    /* Patrón de fondo oscuro */
+    --bg-pattern: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 20%),
+                  radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 20%);
+}
+
+/* --- SOBRESCRIBIR VARIABLES PARA TEMA CLARO --- */
+[data-tema="light"] {
+    --bg-body: #f1f5f9;       /* Gris muy claro (Slate-100) en lugar de blanco puro */
+    --bg-card: #ffffff;       /* Tarjetas blancas puras */
+    --text-main: #0f172a;     /* Texto casi negro */
+    --text-muted: #64748b;    /* Texto gris medio */
+    --border: #cbd5e1;        /* Borde gris claro */
+
+    /* Sombras más suaves para modo claro */
+    --shadow-card: 0 10px 15px -3px rgba(148, 163, 184, 0.15), 0 4px 6px -2px rgba(148, 163, 184, 0.1);
+
+    /* Patrón de fondo más sutil */
+    --bg-pattern: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 20%),
+                  radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 20%);
+}
+
+/* --- APLICACIÓN DE VARIABLES --- */
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-body);
+    background-image: var(--bg-pattern); /* Usamos la variable aquí */
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    /* TRANSICIÓN SUAVE DE TEMA */
+    /* Esto hace que el cambio de color no sea brusco, sino animado */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Aseguramos que las tarjetas y bordes también transicionen suavemente */
+.container, header, .form-container, .table-container, .btn, input, td {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ... (El resto de tu CSS de tablas, formularios, etc. sigue igual) ... */
+
+
+/* --- BOTÓN FLOTANTE DE CAMBIO DE TEMA --- */
+.theme-toggle-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: var(--bg-card);
+    color: var(--primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    border-color: var(--primary);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Icono dentro del botón */
+.theme-icon {
+    pointer-events: none; /* Evita clicks en el icono */
+}
+
+/* LAYOUT PRINCIPAL */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    flex: 1;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, var(--bg-card) 0%, #1a2236 100%);
+    border: 1px solid var(--border);
+    padding: 30px 40px;
+    border-radius: var(--radius);
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-card);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decoración superior del header */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff, #cbd5e1);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    margin: 0;
+}
+
+/* CONTENENIDO */
+.content {
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* BOTONES */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.btn-secondary {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.btn-secondary:hover {
+    background-color: #28344b;
+    color: white;
+    border-color: var(--text-muted);
+}
+
+/* BOTÓN SUPERIOR */
+.add-button-container {
+    display: flex;
+    justify-content: flex-end; /* Alineado a la derecha para mejor UX */
+    margin-bottom: 25px;
+}
+
+/* TABLAS */
+.table-container {
+    background-color: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    overflow: hidden; /* Para bordes redondeados */
+}
+
+.table-container h2 {
+    padding: 25px;
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+.libros-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.libros-table th {
+    background-color: #162032;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    padding: 16px 24px;
+    text-align: left;
+}
+
+.libros-table td {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+.libros-table tr:last-child td {
+    border-bottom: none;
+}
+
+.libros-table tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* IMÁGENES EN TABLA */
+.portada-cell {
+    width: 80px;
+    text-align: center;
+}
+
+.portada-img {
+    width: 60px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+}
+
+.portada-img:hover {
+    transform: scale(1.1);
+}
+
+.no-portada {
+    font-size: 1.5rem;
+    opacity: 0.3;
+}
+
+/* FORMULARIOS */
+.form-container {
+    background-color: var(--bg-card);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border);
+    max-width: 550px;
+    margin: 20px auto;
+}
+
+.form-container h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--primary);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: var(--bg-body);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.form-actions .btn {
+    flex: 1;
+}
+
+/* ALERTAS */
+.alert {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #475569;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .libros-table thead {
+        display: none; /* Ocultar headers en móvil si se desea vista de tarjetas, o mantener */
+    }
+    
+    .libros-table th, .libros-table td {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+}
+
+/* ESTILO INPUT FILE PERSONALIZADO */
+
+/* 1. El contenedor general del input */
+.form-group input[type="file"] {
+    background-color: var(--bg-body); /* Fondo oscuro para el área de texto */
+    padding: 8px; /* Espacio interno */
+    border: 2px dashed var(--border); /* Borde discontinuo estilo "zona de carga" */
+    height: auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: var(--text-muted); /* Color del texto del nombre del archivo */
+}
+
+/* Efecto al pasar el mouse por encima de toda la caja */
+.form-group input[type="file"]:hover {
+    border-color: var(--primary);
+    background-color: rgba(99, 102, 241, 0.05); /* Tinte muy suave del color primario */
+}
+
+/* 2. El botón interno ("Seleccionar archivo" o "Examinar") */
+.form-group input[type="file"]::file-selector-button {
+    background-color: var(--bg-card);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    margin-right: 15px; /* Espacio entre el botón y el texto del archivo */
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+/* Hover específico del botón interno */
+.form-group input[type="file"]:hover::file-selector-button {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+/* --- BOTONES DE ACCIÓN (TABLA) --- */
+
+/* Estilo base para ambos botones */
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+    margin-right: 6px; /* Espacio entre botones */
+}
+
+/* Botón Editar (Ámbar/Amarillo) */
+.btn-edit {
+    background-color: rgba(251, 191, 36, 0.1); /* Fondo muy sutil */
+    color: var(--warning, #fbbf24);
+    border-color: rgba(251, 191, 36, 0.2);
+}
+
+.btn-edit:hover {
+    background-color: rgba(251, 191, 36, 0.2);
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.15);
+    transform: translateY(-2px);
+    border-color: var(--warning, #fbbf24);
+}
+
+/* Botón Borrar (Rojo) */
+.btn-delete {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger, #ef4444);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.btn-delete:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+    transform: translateY(-2px);
+    border-color: var(--danger, #ef4444);
+}
+
+/* Ajuste para la columna de acciones en la tabla */
+.libros-table td:last-child {
+    white-space: nowrap; /* Evita que los botones se pongan uno debajo del otro */
+    width: 1%; /* Hace que la columna ocupe el mínimo espacio necesario */
+}
+
+/* Iconos dentro de los botones */
+.btn-icon {
+    font-size: 1rem;
+    line-height: 1;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.action-btn:hover .btn-icon {
+    transform: scale(1.2) rotate(-10deg); /* Pequeña animación divertida al pasar el mouse */
+}
+
+/* ===== ESTILOS PARA TEMAS CLARO/OSCURO ===== */
+
+/* Tema oscuro (por defecto) */
+body[data-tema="dark"] {
+    --bg-body: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+}
+
+/* Tema claro */
+body[data-tema="light"] {
+    --bg-body: #f8fafc;
+    --bg-card: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --border: #cbd5e1;
+    background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 20%),
+                      radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 20%);
+}
+
+/* Botón cambiar tema */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.btn-cambiar-tema {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    font-size: 1.5rem;
+}
+
+.btn-cambiar-tema:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+.btn-cambiar-tema:active {
+    transform: scale(0.95);
+}
+
+.icon-tema {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Mensaje de éxito (Flash message) */
+.alert-success {
+    background-color: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #86efac;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive para header con tema */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .btn-cambiar-tema {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+}

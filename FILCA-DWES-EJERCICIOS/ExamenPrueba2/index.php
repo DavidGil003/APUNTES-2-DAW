@@ -1,7 +1,7 @@
-<?php 
+<?php
 declare(strict_types=1);
 session_start();
-require_once "db/Conexion.php";
+require_once "config/Conexion.php";
 require_once "controllers/LibroController.php";
 
 $conexion = new Conexion('localhost', 'biblioteca', 'root', '');
@@ -9,7 +9,7 @@ $pdo = $conexion->getPdo();
 
 $controladorLibros = new LibroController($pdo);
 
-require_once "templates/header.php";
+require_once "views/layouts/header.php";
 
 $action = $_GET['action'] ?? 'list';
 
@@ -25,15 +25,10 @@ switch ($action) {
         break;
     case 'list':
     default:
-        require_once "models/LibroModel.php";
-        $model = new LibroModel($pdo);
-        $libros = $model->getAll();
-
-        require_once "templates/body.php";
-
+        $controladorLibros->index();
         break;
 }
 
-require_once "templates/footer.php";
+require_once "views/layouts/footer.php";
 
 ?>
